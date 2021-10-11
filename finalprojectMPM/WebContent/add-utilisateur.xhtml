@@ -18,8 +18,10 @@
 			<ui:define name="content">
 				<f:view>
 					<h:form>
-						<a href="./add-utilisateur.xhtml">Inscription</a>
-						<a href="./login-utilisateur.xhtml">Connexion</a>
+						<h2>Formulaire d'inscription</h2>
+						<h:commandLink action="register">
+							<h:outputText value="Cliquez ici pour enregistrez..."></h:outputText>
+						</h:commandLink>
 					</h:form>
 				</f:view>
 			</ui:define>

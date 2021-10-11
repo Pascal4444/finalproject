@@ -9,6 +9,6 @@
 </head>
 <body>
 
-<jsp:forward page="main.xhtml"></jsp:forward>
+<jsp:forward page="accueil.xhtml"></jsp:forward>
 </body>
 </html>

@@ -7,7 +7,7 @@ import fr.project.entity.Utilisateur;
 
 public interface IUtilisateurDao {
 
-	List<Utilisateur> getCours() throws SQLException;
-	Utilisateur getCoursById(Integer id) throws SQLException;
-	Utilisateur addCours(Utilisateur cours) throws Exception;
+	List<Utilisateur> getUtilisateur() throws SQLException;
+	Utilisateur getUtilisateurById(Integer id) throws SQLException;
+	Utilisateur addUtilisateur(Utilisateur utilisateurs) throws Exception;
 }

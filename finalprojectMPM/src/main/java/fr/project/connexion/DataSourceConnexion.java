@@ -12,8 +12,8 @@ public class DataSourceConnexion {
 
 	public Connection getConnection() throws SQLException {
 		
-		String url = "jdbc:mysql://localhost:3306/project_final_db?useSSL=false&serverTimezone=UTC";
-		String user = "projectdb";
+		String url = "jdbc:mysql://localhost:3306/projet_final_db?useSSL=false&serverTimezone=UTC";
+		String user = "projetdb";
 		String password = "1234";
 		return DriverManager.getConnection(url, user, password);
 	}

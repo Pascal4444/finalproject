@@ -7,10 +7,6 @@ import fr.project.entity.Categorie;
 
 public class Article {
 
-	public Article() {
-		// TODO Auto-generated constructor stub
-	}
-
 	private Integer id;
 	
 	private String nom;

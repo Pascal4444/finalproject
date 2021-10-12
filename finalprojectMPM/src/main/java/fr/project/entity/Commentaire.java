@@ -14,7 +14,7 @@ public class Commentaire {
 	
 	private Article article;
 	
-	private User user;
+	private Utilisateur utilisateur;
 	
 	
 	
@@ -58,8 +58,8 @@ public class Commentaire {
 		this.article = article;
 	}
 
-	public User getUser() {
-		return user;
+	public Utilisateur getUser() {
+		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {

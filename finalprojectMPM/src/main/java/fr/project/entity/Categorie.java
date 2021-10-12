@@ -6,10 +6,6 @@ import java.util.List;
 import fr.project.entity.Article;
 
 public class Categorie {
-
-	public Categorie() {
-		// TODO Auto-generated constructor stub
-	}
 	private Integer id;
 	
 	private String nom;

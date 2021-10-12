@@ -29,7 +29,7 @@ public class Commande {
 	
 	private Integer cartePaiementDefaut;
 	
-	private Utilisateur Utilisateur;
+	private Utilisateur utilisateur;
 	
 	private List<LigneDeCommande> lignesDeCommande;
 
@@ -118,7 +118,7 @@ public class Commande {
 	}
 
 	public Utilisateur getUtilisateur() {
-		return Utilisateur;
+		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {
@@ -133,17 +133,13 @@ public class Commande {
 		this.lignesDeCommande = lignesDeCommande;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public String toString() {
 		return "Commande [id=" + id + ", numero=" + numero + ", dateCommande=" + dateCommande + ", dateLivraison="
 				+ dateLivraison + ", totalRemise=" + totalRemise + ", fraisExpedition=" + fraisExpedition
 				+ ", total_general=" + total_general + ", adresseFacturation=" + adresseFacturation
 				+ ", adresseLivraison=" + adresseLivraison + ", cartePaiementDefaut=" + cartePaiementDefaut + ", ="
-				+ user + ", lignesDeCommande=" + lignesDeCommande + "]";
+				+ utilisateur + ", lignesDeCommande=" + lignesDeCommande + "]";
 	}
 	
 

@@ -6,10 +6,6 @@ import fr.project.entity.Utilisateur;
 
 public class CartePaiement {
 
-	public CartePaiement() {
-		// TODO Auto-generated constructor stub
-	}
-
 	private Integer id;
 	
 	private String nomProprietaire;
@@ -22,7 +18,7 @@ public class CartePaiement {
 	
 	private byte[] cryptogramme;
 	
-	private Utilisateur Utilisateur;
+	private Utilisateur utilisateur;
 	
 public CartePaiement() {
 		

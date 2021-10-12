@@ -1,6 +1,7 @@
 package fr.project.entity;
 
-import fr.doranco.ecommerce.entity.User;
+
+import fr.project.entity.Utilisateur;
 
 public class Adresse {
 }
@@ -52,12 +53,12 @@ public class Adresse {
 		this.codePostal = codePostal;
 	}
 
-	public User getUser() {
-		return user;
+	public Utlisateur getUtilisateur() {
+		return Utlisateur;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	@Override

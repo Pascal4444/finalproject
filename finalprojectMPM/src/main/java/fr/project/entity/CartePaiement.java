@@ -2,7 +2,7 @@ package fr.project.entity;
 
 import java.util.Date;
 
-import fr.doranco.ecommerce.entity.User;
+import fr.project.entity.Utilisateur;
 
 public class CartePaiement {
 
@@ -22,7 +22,7 @@ public class CartePaiement {
 	
 	private byte[] cryptogramme;
 	
-	private User user;
+	private Utilisateur Utilisateur;
 	
 public CartePaiement() {
 		
@@ -76,12 +76,12 @@ public CartePaiement() {
 		this.cryptogramme = cryptogramme;
 	}
 
-	public User getUser() {
-		return user;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	@Override

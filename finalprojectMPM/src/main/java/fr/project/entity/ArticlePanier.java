@@ -1,7 +1,7 @@
 package fr.project.entity;
 
-import fr.doranco.ecommerce.entity.Article;
-import fr.doranco.ecommerce.entity.User;
+import fr.project.entity.Article;
+import fr.project.entity.Utilisateur;
 
 public class ArticlePanier {
 
@@ -45,12 +45,12 @@ public ArticlePanier() {
 		this.quantite = quantite;
 	}
 
-	public User getUser() {
-		return user;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUtilisateurr(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	
 	@Override

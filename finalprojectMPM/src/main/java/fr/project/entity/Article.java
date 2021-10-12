@@ -3,8 +3,7 @@ package fr.project.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.doranco.ecommerce.entity.Categorie;
-import fr.doranco.ecommerce.entity.Commentaire;
+import fr.project.entity.Categorie;
 
 public class Article {
 

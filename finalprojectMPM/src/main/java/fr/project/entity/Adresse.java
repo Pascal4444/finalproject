@@ -3,16 +3,9 @@ package fr.project.entity;
 
 import fr.project.entity.Utilisateur;
 
-public class Adresse<Utlisateur> {
-	
-	
-	private Integer id;
-	private Integer numero;
-	private String rue;
-	private String ville;
-	private String codePostal;
-	private Utilisateur utilisateur;
-	
+public class Adresse {
+}
+
 
 	public Adresse(Integer numero, String rue, String ville, String codePostal) {
 		this.numero = numero;
@@ -24,6 +17,7 @@ public class Adresse<Utlisateur> {
 	public Integer getId() {
 		return id;
 	}
+.0
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -60,8 +54,8 @@ public class Adresse<Utlisateur> {
 		this.codePostal = codePostal;
 	}
 
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Utlisateur getUtilisateur() {
+		return Utlisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {

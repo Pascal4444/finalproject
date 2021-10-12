@@ -16,11 +16,6 @@ public class Commentaire {
 	
 	private Utilisateur utilisateur;
 	
-	
-	
-	public Commentaire() {
-		// TODO Auto-generated constructor stub
-	}
 	public Commentaire(String texte, Integer note) {
 		this.texte = texte;
 		this.note = note;

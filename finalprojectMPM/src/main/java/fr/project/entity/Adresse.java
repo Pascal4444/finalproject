@@ -8,13 +8,14 @@ public class Adresse {
 	
 	
 	private Integer numero;
+	
 	private String rue;
+	
 	private String ville;
 	private String codePostal;
 	private Integer id;
-	private Utilisateur utilisateur;
 	
-
+	private Utilisateur utilisateur;
 	public Adresse(Integer numero, String rue, String ville, String codePostal) {
 		this.numero = numero;
 		this.rue = rue;

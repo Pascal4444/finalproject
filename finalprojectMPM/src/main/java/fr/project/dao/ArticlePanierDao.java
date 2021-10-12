@@ -7,13 +7,16 @@ import fr.project.entity.ArticlePanier;
 
 public class ArticlePanierDao implements IArticlePanierDao {
 
+	//private static final DataSourceConnexion MDB = new DataSourceConnexion();
+	//private Connection connexion = null;
+	
 	public ArticlePanierDao() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public List<ArticlePanier> getArticlePanier() throws SQLException {
-		// TODO Auto-generated method stub
+		// Panier???
 		return null;
 	}
 

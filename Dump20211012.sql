@@ -1,4 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `projet_final_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+grant ALL privileges on projet_final_db.* TO 'projetdb'@'localhost' IDENTIFIED BY '1234';
+CREATE DATABASE  IF NOT EXISTS `projet_final_db` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `projet_final_db`;
 -- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
@@ -23,7 +24,7 @@ USE `projet_final_db`;
 
 DROP TABLE IF EXISTS `adresse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `adresse` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numero` varchar(4) NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE `adresse` (
   `codePostal` varchar(5) NOT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +51,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
@@ -63,7 +64,7 @@ CREATE TABLE `article` (
   `videos` varchar(45) DEFAULT NULL,
   `commentaires` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,14 +82,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `article_panier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `article_panier` (
   `id` int NOT NULL,
   `article` varchar(45) NOT NULL,
   `quantite` varchar(45) NOT NULL,
   `utilisateur` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +107,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carte_paiement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `carte_paiement` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom_proprietaire` varchar(10) NOT NULL,
@@ -116,7 +117,7 @@ CREATE TABLE `carte_paiement` (
   `prenom_proprietaire` varchar(45) NOT NULL,
   `utilisateur` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +135,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `categorie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `categorie` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
@@ -144,7 +145,7 @@ CREATE TABLE `categorie` (
   `photo` varchar(45) NOT NULL,
   `articles` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +163,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `commande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `commande` (
   `id` int NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) NOT NULL,
@@ -177,7 +178,7 @@ CREATE TABLE `commande` (
   `utilisateur` varchar(45) NOT NULL,
   `lignes_commande` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +196,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `commentaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `commentaire` (
   `id` int NOT NULL AUTO_INCREMENT,
   `texte` varchar(45) NOT NULL,
@@ -203,7 +204,7 @@ CREATE TABLE `commentaire` (
   `article` varchar(45) DEFAULT NULL,
   `utilisateur` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +222,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ligne_de_commande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `ligne_de_commande` (
   `id` int NOT NULL AUTO_INCREMENT,
   `quantite` varchar(45) NOT NULL,
@@ -230,7 +231,7 @@ CREATE TABLE `ligne_de_commande` (
   `commande` varchar(45) NOT NULL,
   `article` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,13 +249,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `params`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `params` (
   `id` int NOT NULL AUTO_INCREMENT,
   `cle_cryptage_pwd` varchar(45) DEFAULT NULL,
   `cle_cryptage_cp` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +273,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `utilisateur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `utilisateur` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
@@ -288,7 +289,7 @@ CREATE TABLE `utilisateur` (
   `commentaires` varchar(45) NOT NULL,
   `panier` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

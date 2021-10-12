@@ -11,4 +11,22 @@ public class UtilisateurDao implements IUtilisateurDao {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public List<Utilisateur> getUtilisateur() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utilisateur getUtilisateurById(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Utilisateur addUtilisateur(Utilisateur utilisateurs) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

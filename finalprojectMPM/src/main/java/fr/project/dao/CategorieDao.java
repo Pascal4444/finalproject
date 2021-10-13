@@ -47,9 +47,27 @@ public class CategorieDao implements ICategorieDao {
 	}
 
 	@Override
-	public Categorie addCategorie(Categorie categorie) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Categorie addCategorie(Categorie cate) throws Exception {
+		String request = "Insert into categorie(nom, remise, is_remise_cumulable, photo, articles)values (?, ?, ?, ?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, cate.getNom());
+		ps.setInt(2, cate.getRemise());
+		ps.setBoolean(3, cate.getIscumulable());
+		ps.setString(4, cate.getPhoto());
+		ps.setString(5, cate.getArticles());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			cate.setId(rs.getInt(1));
+		}
+		return cate;
 	}
 
 }

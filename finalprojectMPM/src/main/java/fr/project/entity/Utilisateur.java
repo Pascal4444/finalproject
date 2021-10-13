@@ -28,19 +28,23 @@ public class Utilisateur {
 	
 	private String telephone;
 	
+	private Adresse adressedefault;
+	
 	private List<Adresse> adresses;
 	
 	private List<Commande> commandes;
 	
+	private CartePaiement cartePaiementdefault;
+	
 	private List<CartePaiement> cartesPaiement;
 	
-	private List<Commentaire> commentaires;
+	// On se commente sois-meme
+	private String commentaires;
 	
 	public Utilisateur() {
 		this.commandes = new ArrayList<Commande>();
 		this.adresses = new ArrayList<Adresse>();
 		this.cartesPaiement = new ArrayList<CartePaiement>();
-		this.commentaires = new ArrayList<Commentaire>();
 	}
 
 	public Integer getId() {
@@ -147,12 +151,41 @@ public class Utilisateur {
 		this.cartesPaiement = cartesPaiement;
 	}
 
-	public List<Commentaire> getCommentaires() {
+	public String getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(List<Commentaire> commentaires) {
+	public void setCommentaires(String commentaires) {
 		this.commentaires = commentaires;
+	}
+	
+	public Adresse getAdressedefault() {
+		return adressedefault;
+	}
+
+	public void setAdressedefault(Adresse adressedefault) {
+		this.adressedefault = adressedefault;
+		if (adresses.contains(adressedefault)) {
+		    System.out.println("Adresse existant");
+		} else {
+		    System.out.println("Enregistrement de l'adresse");
+		    adresses.add(adressedefault);
+		}
+	}
+
+	
+	public CartePaiement getCartePaiementdefault() {
+		return cartePaiementdefault;
+	}
+
+	public void setCartePaiementdefault(CartePaiement cartePaiementdefault) {
+		this.cartePaiementdefault = cartePaiementdefault;
+		if (cartesPaiement.contains(cartePaiementdefault)) {
+		    System.out.println("Moyen existant");
+		} else {
+		    System.out.println("Enregistrement du moyen de payement");
+		    cartesPaiement.add(cartePaiementdefault);
+		}
 	}
 
 	@Override

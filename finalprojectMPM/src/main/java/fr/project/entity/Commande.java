@@ -20,9 +20,9 @@ public class Commande {
 	
 	private Double total_general;
 	
-	private Integer adresseFacturation;
+	private Adresse adresseFacturation;
 	
-	private Integer adresseLivraison;
+	private Adresse adresseLivraison;
 	
 	private Integer cartePaiementDefaut;
 	
@@ -90,19 +90,19 @@ public class Commande {
 		this.total_general = total_general;
 	}
 
-	public Integer getAdresseFacturation() {
+	public Adresse getAdresseFacturation() {
 		return adresseFacturation;
 	}
 
-	public void setAdresseFacturation(Integer adresseFacturation) {
+	public void setAdresseFacturation(Adresse adresseFacturation) {
 		this.adresseFacturation = adresseFacturation;
 	}
 
-	public Integer getAdresseLivraison() {
+	public Adresse getAdresseLivraison() {
 		return adresseLivraison;
 	}
 
-	public void setAdresseLivraison(Integer adresseLivraison) {
+	public void setAdresseLivraison(Adresse adresseLivraison) {
 		this.adresseLivraison = adresseLivraison;
 	}
 

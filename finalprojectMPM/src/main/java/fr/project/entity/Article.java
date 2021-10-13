@@ -19,6 +19,10 @@ public class Article {
 	
 	private Boolean isVendable;
 	
+	private String photos;
+	
+	private String videos;
+	
 	private List<Commentaire> commentaires;
 	
 	private Categorie categorie;
@@ -99,6 +103,22 @@ public class Article {
 		this.categorie = categorie;
 	}
 	
+	public String getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
+
+	public String getVideos() {
+		return videos;
+	}
+
+	public void setVideos(String videos) {
+		this.videos = videos;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nom=" + nom + ", description=" + description + ", prix=" + prix + ", remise="

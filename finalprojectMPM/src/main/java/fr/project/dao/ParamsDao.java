@@ -46,8 +46,23 @@ public class ParamsDao implements IParamsDao {
 
 	@Override
 	public Params addParams(Params params) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String request = "Insert into params(cle_cryptage_pwd, cle_cryptage_cp)values (?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		ps.setBytes(1, params.getCleCryptagePwd());
+		ps.setBytes(2, params.getCleCryptageCp());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			params.setId(rs.getInt(1));
+		}
+		return params;
 	}
 
 }

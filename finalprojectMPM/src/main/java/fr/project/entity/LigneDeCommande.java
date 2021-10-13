@@ -5,8 +5,6 @@ public class LigneDeCommande {
 
 	private Integer id;
 	
-	private String titreArticle;
-	
 	private Double prixArticle;
 	
 	private Double remiseArticle;
@@ -15,23 +13,16 @@ public class LigneDeCommande {
 	
 	private Commande commande;
 	
+	private Article article;
 	
 	public LigneDeCommande() {
 	}
 
-	public LigneDeCommande(String titreArticle, Double prixArticle, Integer quantite, Double remiseArticle) {
+	public LigneDeCommande(Double prixArticle, Integer quantite, Double remiseArticle) {
 		
-		this.titreArticle = titreArticle;
 		this.prixArticle = prixArticle;
 		this.quantite = quantite;
 		this.remiseArticle = remiseArticle;
-	}
-	
-
-	@Override
-	public String toString() {
-		return "LigneDeCommande [id=" + id + ", titreArticle=" + titreArticle + ", prixArticle=" + prixArticle
-				+ ", remiseArticle=" + remiseArticle + ", quantite=" + quantite + ", commande=" + commande + "]";
 	}
 
 	public Integer getId() {
@@ -41,13 +32,13 @@ public class LigneDeCommande {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public String getTitreArticle() {
-		return titreArticle;
+	
+	public Article getArticle() {
+		return article;
 	}
 
-	public void setTitreArticle(String titreArticle) {
-		this.titreArticle = titreArticle;
+	public void setArticle(Article article) {
+		this.article = article;
 	}
 
 	public Double getPrixArticle() {
@@ -81,4 +72,12 @@ public class LigneDeCommande {
 	public void setRemiseArticle(Double remiseArticle) {
 		this.remiseArticle = remiseArticle;
 	}
+
+	@Override
+	public String toString() {
+		return "LigneDeCommande [id=" + id + ", prixArticle=" + prixArticle + ", remiseArticle=" + remiseArticle
+				+ ", quantite=" + quantite + ", commande=" + commande + ", article=" + article + "]";
+	}
+	
+	
 }

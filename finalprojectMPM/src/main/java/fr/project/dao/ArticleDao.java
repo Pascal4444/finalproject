@@ -12,7 +12,6 @@ import fr.project.connexion.DataSourceConnexion;
 import fr.project.entity.Article;
 import fr.project.entity.Categorie;
 import fr.project.entity.Commentaire;
-import fr.project.entity.Utilisateur;
 
 public class ArticleDao implements IArticleDao {
 
@@ -68,8 +67,31 @@ public class ArticleDao implements IArticleDao {
 
 	@Override
 	public Article addArticle(Article article) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String request = "Insert into adresse(nom, description, prix, remise, stock, is_salable, photos, videos, commentaires, categorie)values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		Categorie cate = article.getCategorie();
+		ps.setString(1, article.getNom());
+		ps.setString(2, article.getDescription());
+		ps.setDouble(3, article.getPrix());
+		ps.setInt(4, article.getRemise());
+		ps.setInt(5, article.getStock());
+		ps.setBoolean(6, article.getIsVendable());
+		ps.setString(7, article.getPhotos());
+		ps.setString(8, article.getVideos());
+		ps.setInt(9, cate.getId());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			article.setId(rs.getInt(1));
+		}
+		return article;
 	}
 
 }

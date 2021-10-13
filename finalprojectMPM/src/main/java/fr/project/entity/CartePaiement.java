@@ -2,8 +2,6 @@ package fr.project.entity;
 
 import java.util.Date;
 
-import fr.project.entity.Utilisateur;
-
 public class CartePaiement {
 
 	private Integer id;
@@ -20,7 +18,7 @@ public class CartePaiement {
 	
 	private Utilisateur utilisateur;
 	
-public CartePaiement() {
+	public CartePaiement() {
 		
 	}
 

@@ -3,8 +3,6 @@ package fr.project.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.project.entity.Categorie;
-
 public class Article {
 
 	private Integer id;

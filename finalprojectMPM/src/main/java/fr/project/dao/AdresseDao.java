@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import fr.project.connexion.DataSourceConnexion;
 import fr.project.entity.Adresse;
+import fr.project.entity.Utilisateur;
 
 public class AdresseDao implements IAdresseDao {
 
@@ -36,7 +36,14 @@ public class AdresseDao implements IAdresseDao {
 			adresse.setRue(rs.getString(3));
 			adresse.setVille(rs.getString(4));
 			adresse.setCodePostal(rs.getString(5));
-			//adresse.setUtilisateur(rs.get(6));
+				// Récupération Utilisateur
+				int idUser = rs.getInt(6);
+				Utilisateur user = new Utilisateur();
+				IUtilisateurDao userDao = new UtilisateurDao();
+				user = userDao.getUtilisateurById(idUser);
+				
+				//user.setId(idUser);
+			adresse.setUtilisateur(user);
 			listadresse.add(adresse);
 		}
 		return listadresse;
@@ -44,8 +51,28 @@ public class AdresseDao implements IAdresseDao {
 
 	@Override
 	public Adresse getAdresseById(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Adresse adresse = new Adresse();
+		String request = "SELECT * FROM adresse WHERE id = ?";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+			adresse.setId(rs.getInt(1));
+			adresse.setNumero(rs.getInt(2));
+			adresse.setRue(rs.getString(3));
+			adresse.setVille(rs.getString(4));
+			adresse.setCodePostal(rs.getString(5));
+				// Récupération Utilisateur
+				int idUser = rs.getInt(6);
+				Utilisateur user = new Utilisateur();
+				IUtilisateurDao userDao = new UtilisateurDao();
+				user = userDao.getUtilisateurById(idUser);
+				
+				//user.setId(idUser);
+			adresse.setUtilisateur(user);
+		}
+		return adresse;
 	}
 
 	@Override

@@ -10,6 +10,9 @@ import java.util.List;
 
 import fr.project.connexion.DataSourceConnexion;
 import fr.project.entity.Article;
+import fr.project.entity.Categorie;
+import fr.project.entity.Commentaire;
+import fr.project.entity.Utilisateur;
 
 public class ArticleDao implements IArticleDao {
 
@@ -37,7 +40,20 @@ public class ArticleDao implements IArticleDao {
 			article.setRemise(rs.getInt(5));
 			article.setStock(rs.getInt(6));
 			article.setIsVendable(rs.getBoolean(7));
-			//article.setCommentaires(rs.getList<Commentaire>(8));
+				// Récupération commentaire
+				int idcomment = rs.getInt(10);
+				List<Commentaire> listcomment = new ArrayList<>();
+				ICommentaireDao commentDao = new CommentaireDao();
+				listcomment = commentDao.getCommentairebyArticle(idcomment);
+				
+			article.setCommentaires(listcomment);
+				// Récupération Categorie
+				int idcate = rs.getInt(11);
+				Categorie cate = new Categorie();
+				ICategorieDao cateDao = new CategorieDao();
+				cate = cateDao.getCategorieById(idcate);
+				
+			article.setCategorie(cate);
 			//article.setCategorie(rs.get);
 			listarticle.add(article);
 		}

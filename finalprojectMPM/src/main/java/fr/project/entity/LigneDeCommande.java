@@ -1,7 +1,5 @@
 package fr.project.entity;
 
-import fr.doranco.ecommerce.entity.Commande;
-
 
 public class LigneDeCommande {
 

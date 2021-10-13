@@ -5,9 +5,6 @@ import fr.project.entity.Utilisateur;
 
 public class ArticlePanier {
 
-	public ArticlePanier() {
-		// TODO Auto-generated constructor stub
-	}
 
 	private Integer id;
 	
@@ -15,7 +12,7 @@ public class ArticlePanier {
 	
 	private Integer quantite;
 	
-	private User user;
+	private Utilisateur utilisateur;
 	
 public ArticlePanier() {
 		

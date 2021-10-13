@@ -14,13 +14,8 @@ public class Commentaire {
 	
 	private Article article;
 	
-	private User user;
+	private Utilisateur utilisateur;
 	
-	
-	
-	public Commentaire() {
-		// TODO Auto-generated constructor stub
-	}
 	public Commentaire(String texte, Integer note) {
 		this.texte = texte;
 		this.note = note;
@@ -58,8 +53,8 @@ public class Commentaire {
 		this.article = article;
 	}
 
-	public User getUser() {
-		return user;
+	public Utilisateur getUser() {
+		return utilisateur;
 	}
 
 	public void setUtilisateur(Utilisateur utilisateur) {

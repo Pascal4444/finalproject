@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import fr.doranco.ecommerce.entity.Adresse;
-import fr.doranco.ecommerce.entity.CartePaiement;
-import fr.doranco.ecommerce.entity.Commande;
-import fr.doranco.ecommerce.entity.Commentaire;
+import fr.project.entity.Adresse;
+import fr.project.entity.CartePaiement;
+import fr.project.entity.Commande;
+import fr.project.entity.Commentaire;
 
 public class Utilisateur {
 
@@ -41,7 +41,7 @@ public class Utilisateur {
 	
 	private List<Commentaire> commentaires;
 	
-	public User() {
+	public Utilisateur() {
 		this.commandes = new ArrayList<Commande>();
 		this.adresses = new ArrayList<Adresse>();
 		this.cartesPaiement = new ArrayList<CartePaiement>();
@@ -162,7 +162,7 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
+		return "U [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
 				+ dateNaissance + ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password="
 				+ Arrays.toString(password) + ", telephone=" + telephone + "]";
 	}

@@ -10,4 +10,5 @@ public interface ICommentaireDao {
 	List<Commentaire> getCommentaire() throws SQLException;
 	Commentaire getCommentaireById(Integer id) throws SQLException;
 	Commentaire addCommentaire(Commentaire cours) throws Exception;
+	List<Commentaire> getCommentairebyArticle(Integer id) throws SQLException;
 }

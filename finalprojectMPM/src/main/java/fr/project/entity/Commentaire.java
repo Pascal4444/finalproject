@@ -53,7 +53,7 @@ public class Commentaire {
 		this.article = article;
 	}
 
-	public Utilisateur getUser() {
+	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 

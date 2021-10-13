@@ -32,7 +32,7 @@ public class AdresseDao implements IAdresseDao {
 		while (rs.next()) {
 			Adresse adresse = new Adresse();
 			adresse.setId(rs.getInt(1));
-			adresse.setNumero(rs.getInt(2));
+			adresse.setNumero(rs.getString(2));
 			adresse.setRue(rs.getString(3));
 			adresse.setVille(rs.getString(4));
 			adresse.setCodePostal(rs.getString(5));
@@ -59,15 +59,13 @@ public class AdresseDao implements IAdresseDao {
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 			adresse.setId(rs.getInt(1));
-			adresse.setNumero(rs.getInt(2));
+			adresse.setNumero(rs.getString(2));
 			adresse.setRue(rs.getString(3));
 			adresse.setVille(rs.getString(4));
 			adresse.setCodePostal(rs.getString(5));
 				// Récupération Utilisateur
-				int idUser = rs.getInt(6);
 				Utilisateur user = new Utilisateur();
-				IUtilisateurDao userDao = new UtilisateurDao();
-				user = userDao.getUtilisateurById(idUser);
+				user.setId(rs.getInt(6));
 				
 				//user.setId(idUser);
 			adresse.setUtilisateur(user);
@@ -77,8 +75,29 @@ public class AdresseDao implements IAdresseDao {
 
 	@Override
 	public Adresse addAdresse(Adresse adresse) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String request = "Insert into adresse(numero, rue, ville, codePostal, user_id)values (?, ?, ?, ?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		Utilisateur user = adresse.getUtilisateur();
+		ps.setString(1, adresse.getNumero());
+		ps.setString(2, adresse.getRue());
+		ps.setString(3, adresse.getVille());
+		ps.setString(4, adresse.getCodePostal());
+		ps.setInt(5, user.getId());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			adresse.setId(rs.getInt(1));
+		}
+		return adresse;
+		
 	}
 
 }

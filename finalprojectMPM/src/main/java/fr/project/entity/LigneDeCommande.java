@@ -1,5 +1,6 @@
 package fr.project.entity;
 
+import fr.project.entity.Commande;
 
 public class LigneDeCommande {
 

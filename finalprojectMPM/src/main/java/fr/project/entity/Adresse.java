@@ -1,11 +1,6 @@
 package fr.project.entity;
 
-
-import fr.project.entity.Utilisateur;
-
 public class Adresse {
-	
-	
 	
 	private Integer numero;
 	
@@ -16,6 +11,10 @@ public class Adresse {
 	private Integer id;
 	
 	private Utilisateur utilisateur;
+	
+	public Adresse() {
+	}
+	
 	public Adresse(Integer numero, String rue, String ville, String codePostal) {
 		this.numero = numero;
 		this.rue = rue;

@@ -1,8 +1,5 @@
 package fr.project.entity;
 
-import fr.project.entity.Article;
-import fr.project.entity.Utilisateur;
-
 public class ArticlePanier {
 
 
@@ -14,7 +11,7 @@ public class ArticlePanier {
 	
 	private Utilisateur utilisateur;
 	
-public ArticlePanier() {
+	public ArticlePanier() {
 		
 	}
 

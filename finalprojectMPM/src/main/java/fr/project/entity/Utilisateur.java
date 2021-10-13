@@ -5,11 +5,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import fr.project.entity.Adresse;
-import fr.project.entity.CartePaiement;
-import fr.project.entity.Commande;
-import fr.project.entity.Commentaire;
-
 public class Utilisateur {
 
 	private Integer id;

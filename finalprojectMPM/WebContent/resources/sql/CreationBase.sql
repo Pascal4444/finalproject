@@ -62,7 +62,8 @@ CREATE TABLE `article` (
   `is_salable` bit(1) DEFAULT NULL,
   `photos` varchar(45) DEFAULT NULL,
   `videos` varchar(45) DEFAULT NULL,
-  `commentaires` varchar(45) DEFAULT NULL,
+  `commentaires` int(11) DEFAULT NULL,
+  `categorie` int(11) DEFAULT NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -111,10 +112,10 @@ DROP TABLE IF EXISTS `carte_paiement`;
 CREATE TABLE `carte_paiement` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom_proprietaire` varchar(10) NOT NULL,
+  `prenom_proprietaire` varchar(45) NOT NULL,
   `numero` varchar(45) DEFAULT NULL,
   `date_fin_validite` varchar(45) DEFAULT NULL,
   `cryptogramme` varchar(45) DEFAULT NULL,
-  `prenom_proprietaire` varchar(45) NOT NULL,
   `utilisateur` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -201,7 +202,7 @@ CREATE TABLE `commentaire` (
   `id` int NOT NULL AUTO_INCREMENT,
   `texte` varchar(45) NOT NULL,
   `note` varchar(45) DEFAULT NULL,
-  `article` varchar(45) DEFAULT NULL,
+  `article` int(11) DEFAULT NULL,
   `utilisateur` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

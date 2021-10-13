@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import fr.project.entity.LigneDeCommande;
-import fr.project.entity.Utilisateur;
-
 public class Commande {
 
 	private Integer id;

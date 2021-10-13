@@ -1,8 +1,5 @@
 package fr.project.entity;
 
-import fr.project.entity.Article;
-import fr.project.entity.Utilisateur;
-
 public class Commentaire {
 
 	
@@ -15,6 +12,9 @@ public class Commentaire {
 	private Article article;
 	
 	private Utilisateur utilisateur;
+	
+	public Commentaire() {
+	}
 	
 	public Commentaire(String texte, Integer note) {
 		this.texte = texte;

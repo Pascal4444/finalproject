@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 1.01 Transitional//EN"
-	"http://www.w3.org/TR/html1/DTD/xhtml1-transitional.did">
-	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	<head>
-		<META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Formation DORANCO</title>
-	</head>
-	<BODY>
-		<!-- DECLARATION DU TEMPLATE DONT LA PAGE EST CLIENTE -->
-		<ui:composition template="/resources/template/layout.xhtml">
-			
-			<!-- Redefinition de la zone 'content' du layout -->
-			<ui:define name="content">
-				<f:view>
-					<h:form>
-						<h2>Formulaire d'enregistrement pour un stagiaire DORANCO</h2>
-						<h:commandLink action="register">
-							<h:outputText value="Cliquez ici pour enregistrez..."></h:outputText>
-						</h:commandLink>
-					</h:form>
-				</f:view>
-			</ui:define>
-		
-		</ui:composition>
-	</BODY>
+	
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
 
+<body>
+	<!-- DECLARATION DU TEMPLATE DONT LA PAGE EST CLIENTE -->
+	<ui:composition template="/resources/template/layout.xhtml">
+	
+		<ui:define name="header">
+			<h1>Gestion des achats</h1>
+			<h:form>
+				<h:commandLink action="login-utilisateur">
+					<h:outputText value="Déconnexion - "></h:outputText>
+				</h:commandLink>
+				<h:commandLink action="panier">
+					<h:outputText value="Panier - "></h:outputText>
+				</h:commandLink>
+				<h:commandLink action="historique-commandes">
+					<h:outputText value="Historique commandes"></h:outputText>
+				</h:commandLink>
+				
+			</h:form>
+		</ui:define>
+	
+		<ui:define name="content">
+			<h:form>
+				<h1>Gestion des achats</h1>
+				<p>Liste article par catégorie</p>
+				<p>Ajout panier + qte</p>
+			</h:form>
+		</ui:define>
+	
+	</ui:composition>
+</body>
 </html>

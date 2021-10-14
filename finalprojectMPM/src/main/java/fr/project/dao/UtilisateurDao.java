@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.project.connexion.DataSourceConnexion;
+import fr.project.entity.Adresse;
+import fr.project.entity.CartePaiement;
 import fr.project.entity.Utilisateur;
+import fr.project.utils.Dates;
 
 public class UtilisateurDao implements IUtilisateurDao {
 
@@ -55,9 +58,34 @@ public class UtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur addUtilisateur(Utilisateur utilisateurs) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Utilisateur addUtilisateur(Utilisateur user) throws Exception {
+		String request = "Insert into utilisateur(nom, prenom, date_naissance, profil, email, password, telephone, adresses_default, cartes_de_paiement, commentaires)values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		Adresse adresse = user.getAdressedefault();
+		CartePaiement cp = user.getCartePaiementdefault();
+		ps.setString(1, user.getNom());
+		ps.setString(2, user.getPrenom());
+		ps.setDate(3, Dates.dateUtilToSql(user.getDateNaissance()));
+		ps.setString(4, user.getProfil());
+		ps.setString(5, user.getEmail());
+		ps.setBytes(6, user.getPassword());
+		ps.setString(7, user.getTelephone());
+		ps.setInt(8, adresse.getId());
+		ps.setInt(9, cp.getId());
+		ps.setString(10, user.getCommentaires());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			user.setId(rs.getInt(1));
+		}
+		return user;
 	}
 
 }

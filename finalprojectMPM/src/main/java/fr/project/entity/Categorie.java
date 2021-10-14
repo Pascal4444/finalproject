@@ -1,8 +1,5 @@
 package fr.project.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Categorie {
 	private Integer id;
 	
@@ -10,10 +7,14 @@ public class Categorie {
 	
 	private Integer remise;
 	
-	private List<Article> articles;
+	private Boolean iscumulable;
+	
+	private String articles;
+	
+	private String photo;
+
 	
 	public Categorie() {
-		this.articles = new ArrayList<Article>();
 	}
 
 	public Integer getId() {
@@ -40,17 +41,36 @@ public class Categorie {
 		this.remise = remise;
 	}
 
-	public List<Article> getArticles() {
+	public String getArticles() {
 		return articles;
 	}
 
-	public void setArticles(List<Article> articles) {
+	public void setArticles(String articles) {
 		this.articles = articles;
+	}
+
+	public Boolean getIscumulable() {
+		return iscumulable;
+	}
+
+	public void setIscumulable(Boolean iscumulable) {
+		this.iscumulable = iscumulable;
+	}
+	
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 	@Override
 	public String toString() {
-		return "Categorie [id=" + id + ", nom=" + nom + ", remise=" + remise + "]";
+		return "Categorie [id=" + id + ", nom=" + nom + ", remise=" + remise + ", iscumulable=" + iscumulable
+				+ ", articles=" + articles + ", photo=" + photo + "]";
 	}
+
+	
 
 }

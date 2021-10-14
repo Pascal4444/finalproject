@@ -26,8 +26,8 @@ DROP TABLE IF EXISTS `adresse`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `adresse` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `numero` varchar(4) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `numero` varchar(5) NOT NULL,
   `rue` varchar(45) NOT NULL,
   `ville` varchar(25) NOT NULL,
   `codePostal` varchar(5) NOT NULL,
@@ -53,16 +53,15 @@ DROP TABLE IF EXISTS `article`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `article` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
   `description` varchar(500) NOT NULL,
   `prix` float NOT NULL,
   `remise` float NOT NULL,
-  `stock` varchar(45) NOT NULL,
-  `is_salable` bit(1) DEFAULT NULL,
+  `stock` int(10) NOT NULL,
+  `is_salable` ENUM('true', 'false') DEFAULT NULL,
   `photos` varchar(45) DEFAULT NULL,
   `videos` varchar(45) DEFAULT NULL,
-  `commentaires` int(11) DEFAULT NULL,
   `categorie` int(11) DEFAULT NULL ,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -85,7 +84,7 @@ DROP TABLE IF EXISTS `article_panier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `article_panier` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `article` varchar(45) NOT NULL,
   `quantite` varchar(45) NOT NULL,
   `utilisateur` varchar(45) NOT NULL,
@@ -110,13 +109,13 @@ DROP TABLE IF EXISTS `carte_paiement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `carte_paiement` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom_proprietaire` varchar(10) NOT NULL,
   `prenom_proprietaire` varchar(45) NOT NULL,
-  `numero` varchar(45) DEFAULT NULL,
-  `date_fin_validite` varchar(45) DEFAULT NULL,
-  `cryptogramme` varchar(45) DEFAULT NULL,
-  `utilisateur` varchar(45) NOT NULL,
+  `numero` blob DEFAULT NULL,
+  `date_fin_validite` DATE DEFAULT NULL,
+  `cryptogramme` blob DEFAULT NULL,
+  `utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -138,11 +137,10 @@ DROP TABLE IF EXISTS `categorie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `categorie` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
-  `remise` varchar(45) DEFAULT NULL,
-  `is_remise_cumulable` varchar(45) NOT NULL,
-  `description` varchar(45) NOT NULL,
+  `remise` int DEFAULT NULL,
+  `is_remise_cumulable` ENUM('true','false') NOT NULL,
   `photo` varchar(45) NOT NULL,
   `articles` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
@@ -166,18 +164,17 @@ DROP TABLE IF EXISTS `commande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `commande` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` varchar(45) NOT NULL,
   `date_creation` date NOT NULL,
-  `date-livraison` date NOT NULL,
-  `total-remise` varchar(45) NOT NULL,
-  `frais-expedition` varchar(45) NOT NULL,
-  `total_general` varchar(45) NOT NULL,
+  `date_livraison` date NOT NULL,
+  `total_remise` DOUBLE NOT NULL,
+  `frais_expedition` DOUBLE NOT NULL,
+  `total_general` DOUBLE NOT NULL,
   `adresse_facturation` varchar(45) NOT NULL,
   `adresse_livraison` varchar(45) NOT NULL,
-  `carte_paiement-default` varchar(45) NOT NULL,
-  `utilisateur` varchar(45) NOT NULL,
-  `lignes_commande` varchar(45) NOT NULL,
+  `carte_paiement_default` int NOT NULL,
+  `utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -199,11 +196,11 @@ DROP TABLE IF EXISTS `commentaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `commentaire` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `texte` varchar(45) NOT NULL,
-  `note` varchar(45) DEFAULT NULL,
+  `note` int(1) DEFAULT NULL,
   `article` int(11) DEFAULT NULL,
-  `utilisateur` varchar(45) DEFAULT NULL,
+  `utilisateur` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -225,10 +222,10 @@ DROP TABLE IF EXISTS `ligne_de_commande`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `ligne_de_commande` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `quantite` varchar(45) NOT NULL,
-  `prix_unitaire` varchar(45) NOT NULL,
-  `remise_article` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `quantite` int(2) NOT NULL,
+  `prix_unitaire` DOUBLE NOT NULL,
+  `remise_article` DOUBLE NOT NULL,
   `commande` varchar(45) NOT NULL,
   `article` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
@@ -252,9 +249,9 @@ DROP TABLE IF EXISTS `params`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `params` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `cle_cryptage_pwd` varchar(45) DEFAULT NULL,
-  `cle_cryptage_cp` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cle_cryptage_pwd` blob DEFAULT NULL,
+  `cle_cryptage_cp` blob DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -276,19 +273,17 @@ DROP TABLE IF EXISTS `utilisateur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `utilisateur` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `date_naissance` date NOT NULL,
   `profil` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `telephone` varchar(45) NOT NULL,
-  `adresses` varchar(45) NOT NULL,
-  `commandes` varchar(45) NOT NULL,
-  `cartes_de_paiement` varchar(45) NOT NULL,
-  `commentaires` varchar(45) NOT NULL,
-  `panier` varchar(45) NOT NULL,
+  `password` blob NOT NULL,
+  `telephone` varchar(12) NOT NULL,
+  `adresses_default` int(11) NOT NULL,
+  `cartes_de_paiement` int(11) NOT NULL,
+  `commentaires` varchar(45), -- Représentation de soit
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

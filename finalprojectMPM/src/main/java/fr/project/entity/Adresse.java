@@ -2,7 +2,7 @@ package fr.project.entity;
 
 public class Adresse {
 	
-	private Integer numero;
+	private String numero;
 	
 	private String rue;
 	
@@ -15,7 +15,7 @@ public class Adresse {
 	public Adresse() {
 	}
 	
-	public Adresse(Integer numero, String rue, String ville, String codePostal) {
+	public Adresse(String numero, String rue, String ville, String codePostal) {
 		this.numero = numero;
 		this.rue = rue;
 		this.ville = ville;
@@ -29,11 +29,11 @@ public class Adresse {
 		this.id = id;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

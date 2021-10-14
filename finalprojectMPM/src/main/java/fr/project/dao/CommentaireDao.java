@@ -49,9 +49,28 @@ public class CommentaireDao implements ICommentaireDao {
 	}
 
 	@Override
-	public Commentaire addCommentaire(Commentaire cours) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Commentaire addCommentaire(Commentaire comment) throws Exception {
+		String request = "Insert into commentaire(texte, note, article, utilisateur)values ( ?, ?, ?, ?)";
+		connexion = MDB.getConnection();
+		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+		Article article = comment.getArticle();
+		Utilisateur user = comment.getUtilisateur();
+		ps.setString(1, comment.getTexte());
+		ps.setInt(2, comment.getNote());
+		ps.setInt(3, article.getId());
+		ps.setInt(4, user.getId());
+		
+		int nbLigneAjoutees = ps.executeUpdate();
+		if (nbLigneAjoutees == 0) {
+			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
+		} else if (nbLigneAjoutees > 1) {
+			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		}
+		ResultSet rs = ps.getGeneratedKeys();
+		if (rs.next()) {
+			comment.setId(rs.getInt(1));
+		}
+		return comment;
 	}
 
 	@Override

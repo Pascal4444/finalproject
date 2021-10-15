@@ -310,4 +310,14 @@ DELIMITER ;
 
 -- ------------------------------------------------------------------------
 -- ------------------------------------------------------------------------
--- Procedure Selection Complex
+-- Procedure Selection Autre (c<table> ou c<table>_<element>)
+
+DELIMITER $$
+
+DROP Procedure IF EXISTS cutilisateur_email $$
+CREATE DEFINER=`projetdb`@`localhost` PROCEDURE `cutilisateur_email`(s1 varchar(45))
+BEGIN
+     SELECT * FROM projet_final_db.utilisateur where email = s1;   
+END$$
+
+DELIMITER ;

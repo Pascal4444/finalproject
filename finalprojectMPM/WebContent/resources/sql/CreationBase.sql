@@ -277,13 +277,13 @@ CREATE TABLE `utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `date_naissance` date NOT NULL,
-  `isactif` enum('true','false') NOT NULL Default 'true',
+  `isactif` enum('true','false') Default 'true',
   `profil` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `password` blob NOT NULL,
-  `telephone` varchar(12) NOT NULL,
-  `adresses_default` int(11) NOT NULL,
-  `cartes_de_paiement` int(11) NOT NULL,
+  `telephone` varchar(12),
+  `adresses_default` int(11),
+  `cartes_de_paiement` int(11),
   `commentaires` varchar(45), -- Représentation de soit
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

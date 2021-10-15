@@ -59,7 +59,7 @@ CREATE TABLE `article` (
   `prix` float NOT NULL,
   `remise` float NOT NULL,
   `stock` int(10) NOT NULL,
-  `is_salable` ENUM('true', 'false') DEFAULT NULL,
+  `is_salable` ENUM('true', 'false') DEFAULT 'true',
   `photos` varchar(45) DEFAULT NULL,
   `videos` varchar(45) DEFAULT NULL,
   `categorie` int(11) DEFAULT NULL ,
@@ -140,7 +140,7 @@ CREATE TABLE `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   `remise` int DEFAULT NULL,
-  `is_remise_cumulable` ENUM('true','false') NOT NULL,
+  `is_remise_cumulable` ENUM('true','false') Default 'false',
   `photo` varchar(45) NOT NULL,
   `articles` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
@@ -250,8 +250,8 @@ DROP TABLE IF EXISTS `params`;
 /*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `params` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cle_cryptage_pwd` blob DEFAULT NULL,
-  `cle_cryptage_cp` blob DEFAULT NULL,
+  `cle_cryptage_pwd` blob NOT NULL,
+  `cle_cryptage_cp` blob NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -277,12 +277,13 @@ CREATE TABLE `utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `date_naissance` date NOT NULL,
+  `isactif` enum('true','false') Default 'true',
   `profil` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL UNIQUE,
   `password` blob NOT NULL,
-  `telephone` varchar(12) NOT NULL,
-  `adresses_default` int(11) NOT NULL,
-  `cartes_de_paiement` int(11) NOT NULL,
+  `telephone` varchar(12) ,
+  `adresses_default` int(11) ,
+  `cartes_de_paiement` int(11) ,
   `commentaires` varchar(45), -- Représentation de soit
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

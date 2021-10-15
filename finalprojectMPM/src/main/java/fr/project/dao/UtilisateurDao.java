@@ -37,7 +37,7 @@ public class UtilisateurDao implements IUtilisateurDao {
 			user.setNom(rs.getString(2));
 			user.setPrenom(rs.getString(3));
 			user.setDateNaissance(rs.getDate(4));
-			user.setIsActif(rs.getString(5));
+			user.setIsActif(rs.getBoolean(5));
 			user.setProfil(rs.getString(6));
 			user.setEmail(rs.getString(7));
 			user.setPassword(rs.getBytes(8));
@@ -67,13 +67,14 @@ public class UtilisateurDao implements IUtilisateurDao {
 		ps.setString(1, user.getNom());
 		ps.setString(2, user.getPrenom());
 		ps.setDate(3, Dates.dateUtilToSql(user.getDateNaissance()));
-		ps.setString(4, user.getProfil());
-		ps.setString(5, user.getEmail());
-		ps.setBytes(6, user.getPassword());
-		ps.setString(7, user.getTelephone());
-		ps.setInt(8, adresse.getId());
-		ps.setInt(9, cp.getId());
-		ps.setString(10, user.getCommentaires());
+		ps.setBoolean(4, user.getIsActif());
+		ps.setString(5, user.getProfil());
+		ps.setString(6, user.getEmail());
+		ps.setBytes(7, user.getPassword());
+		ps.setString(8, user.getTelephone());
+		ps.setInt(9, adresse.getId());
+		ps.setInt(10, cp.getId());
+		ps.setString(11, user.getCommentaires());
 		
 		int nbLigneAjoutees = ps.executeUpdate();
 		if (nbLigneAjoutees == 0) {

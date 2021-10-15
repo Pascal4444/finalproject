@@ -22,15 +22,6 @@
 					<h4>Inscription</h4>
 					<table>
 						<tr>
-							<td>Sexe:</td>
-							<td>
-								<h:selectOneRadio id="genre" value="#{userBean.genre}" required="true">
-									<f:selectItems value="#{userBean.genres}" />	
-								</h:selectOneRadio>
-								<h:message for="genre" style="color:red"/>
-							</td>
-						</tr>
-						<tr>
 							<td>Nom:</td>
 							<td>
 								<h:inputText id="nom" value="#{userBean.nom}" required="true">

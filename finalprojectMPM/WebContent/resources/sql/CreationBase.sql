@@ -140,7 +140,7 @@ CREATE TABLE `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
   `remise` int DEFAULT NULL,
-  `is_remise_cumulable` ENUM('true','false') 'false',
+  `is_remise_cumulable` ENUM('true','false') Default 'false',
   `photo` varchar(45) NOT NULL,
   `articles` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)

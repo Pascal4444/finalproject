@@ -88,4 +88,39 @@ public class UtilisateurDao implements IUtilisateurDao {
 		return user;
 	}
 
+	@Override
+	public Utilisateur getUserByEmail(String email) throws Exception {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String request = "call projet_final_db.cutilisateur_email(?)";
+			connexion = MDB.getConnection();
+			ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			Utilisateur user = null;
+			if (rs != null && rs.next()) {
+				user = new Utilisateur();
+				user.setId(rs.getInt("id"));
+				user.setNom(rs.getString("nom"));
+				user.setPrenom(rs.getString("prenom"));
+				user.setDateNaissance(Dates.dateSqlToUtil(rs.getDate("date_naissance")));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getBytes("password"));
+				user.setProfil(rs.getString("profil"));
+			}
+			return user;
+		} finally {
+			if (rs != null && !rs.isClosed()) {
+				rs.close();
+			}
+			if (ps != null && !ps.isClosed()) {
+				ps.close();
+			}
+			if (connexion != null && !connexion.isClosed()) {
+				connexion.close();
+			}
+		}
+	}
+
 }

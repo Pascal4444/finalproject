@@ -10,4 +10,5 @@ public interface IUtilisateurDao {
 	List<Utilisateur> getUtilisateur() throws SQLException;
 	Utilisateur getUtilisateurById(Integer id) throws SQLException;
 	Utilisateur addUtilisateur(Utilisateur utilisateurs) throws Exception;
+	Utilisateur getUserByEmail(String email) throws Exception;
 }

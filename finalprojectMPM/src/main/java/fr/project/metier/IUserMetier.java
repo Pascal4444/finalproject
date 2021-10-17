@@ -4,6 +4,6 @@ import fr.project.entity.Utilisateur;
 
 public interface IUserMetier {
 
-	Utilisateur seConnecter(String email, String password) throws Exception;
-	Utilisateur addUser(Utilisateur user) throws Exception;
+	User seConnecter(String email, String password) throws Exception;
+	User addUser(User user) throws Exception;
 }

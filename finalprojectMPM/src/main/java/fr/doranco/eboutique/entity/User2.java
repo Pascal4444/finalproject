@@ -1,17 +1,15 @@
-package fr.project.entity;
+package fr.doranco.eboutique.entity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import fr.project.utils.Dates;
+public class User2 {
 
-public class Utilisateur {
-
-	private String [] sqlin = new String[2];
-	
 	private Integer id;
+	
+	private String genre;
 	
 	private String nom;
 	
@@ -19,7 +17,7 @@ public class Utilisateur {
 	
 	private Date dateNaissance;
 	
-	private Boolean isActif = null;
+	private String isActif;
 	
 	
 	private String profil;
@@ -28,7 +26,7 @@ public class Utilisateur {
 	
 	private byte[] password;
 	
-	private String telephone = "";
+	private String telephone;
 	
 	private Adresse adressedefault;
 	
@@ -41,9 +39,9 @@ public class Utilisateur {
 	private List<CartePaiement> cartesPaiement;
 	
 	// On se commente sois-meme
-	private String commentaires = "";
+	private String commentaires;
 	
-	public Utilisateur() {
+	public User2() {
 		this.commandes = new ArrayList<Commande>();
 		this.adresses = new ArrayList<Adresse>();
 		this.cartesPaiement = new ArrayList<CartePaiement>();
@@ -55,6 +53,14 @@ public class Utilisateur {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	public String getNom() {
@@ -81,11 +87,11 @@ public class Utilisateur {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public Boolean getIsActif() {
+	public String getIsActif() {
 		return isActif;
 	}
 
-	public void setIsActif(Boolean active) {
+	public void setIsActif(String active) {
 		this.isActif = active;
 	}
 
@@ -162,6 +168,7 @@ public class Utilisateur {
 		if (adresses.contains(adressedefault)) {
 		    System.out.println("Adresse existant");
 		} else {
+		    System.out.println("Enregistrement de l'adresse");
 		    adresses.add(adressedefault);
 		}
 	}
@@ -181,67 +188,11 @@ public class Utilisateur {
 		}
 	}
 
-	/*public String [] getSql() {
-		
-		// nom, prenom, date_naissance Obligatoire
-		if (nom.isEmpty() || prenom.isEmpty() || dateNaissance == null) {
-			System.err.println("nom, prenom ou date vide");
-			System.exit(0);
-		}else {
-			sqlin[0] = "nom, prenom, date_naissance";
-			sqlin[1] = getNom()+", "+getPrenom()+", "+Dates.dateUtilToSql(getDateNaissance());
-		}
-		
-		//Optionnel
-		if (isActif != null) {
-			sqlin[0] = sqlin[0] + ", isactif";
-			sqlin[1] = sqlin[1] + ", "+getIsActif();
-		}
-		
-		if(password == null || profil.isEmpty() || email.isEmpty()) {
-			System.err.println("profil, email ou password vide");
-			System.exit(0);
-		}else {
-			sqlin[0] = sqlin[0] + ", profil, email, password";
-			sqlin[1] = sqlin[1] + ", "+getProfil()+ ", "+getEmail()+ ", "+getPassword();
-		}
-		
-		if (telephone.isEmpty()) {
-			
-		}else {
-			sqlin[0] = sqlin[0] + ", telephone";
-			sqlin[1] = sqlin[1] + ", "+getTelephone();
-		}
-		
-		if (adressedefault != null) {
-			int addId = adressedefault.getId();
-			sqlin[0] = sqlin[0] + ", adresses_default";
-			sqlin[1] = sqlin[1] + ", "+addId;
-		}
-		
-		if (cartePaiementdefault != null) {
-			int cpId = cartePaiementdefault.getId();
-			sqlin[0] = sqlin[0] + ", cartes_de_paiement";
-			sqlin[1] = sqlin[1] + ", "+cpId;
-		}
-		
-		if (commentaires.isEmpty()) {
-		}else {
-			sqlin[0] = sqlin[0] + ", commentaires";
-			sqlin[1] = sqlin[1] + ", "+getCommentaires();
-		}
-		return sqlin;
-	}*/
-	
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
-				+ ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password="
-				+ Arrays.toString(password) + ", telephone=" + telephone + ", adressedefault=" + adressedefault
-				+ ", adresses=" + adresses + ", commandes=" + commandes + ", cartePaiementdefault="
-				+ cartePaiementdefault + ", cartesPaiement=" + cartesPaiement + ", commentaires=" + commentaires + "]";
+		return "U [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
+				+ dateNaissance + ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password="
+				+ Arrays.toString(password) + ", telephone=" + telephone + "]";
 	}
-
-	
 
 }

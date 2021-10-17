@@ -1,44 +1,43 @@
 package fr.doranco.eboutique.entity;
 
-public class Params {
 
+
+
+public class Params {
 	private Integer id;
-	
-	private byte[] cleCryptagePwd;
-	
-	private byte[] cleCryptageCp;
-	
-	
+	private String cle_cryptage_pwd;
+	private String cle_cryptage_cp;
 	public Params() {
 		// TODO Auto-generated constructor stub
+	}
+	public Params(Integer id, String cle_cryptage_pwd, String cle_cryptage_cp) {
+		this.id = id;
+		this.cle_cryptage_pwd = cle_cryptage_pwd;
+		this.cle_cryptage_cp = cle_cryptage_cp;
 	}
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public byte[] getCleCryptagePwd() {
-		return cleCryptagePwd;
+	public String getCle_cryptage_pwd() {
+		return cle_cryptage_pwd;
 	}
-
-	public void setCleCryptagePwd(byte[] cleCryptagePwd) {
-		this.cleCryptagePwd = cleCryptagePwd;
+	public void setCle_cryptage_pwd(String cle_cryptage_pwd) {
+		this.cle_cryptage_pwd = cle_cryptage_pwd;
 	}
-
-	public byte[] getCleCryptageCp() {
-		return cleCryptageCp;
+	public String getCle_cryptage_cp() {
+		return cle_cryptage_cp;
 	}
-
-	public void setCleCryptageCp(byte[] cleCryptageCp) {
-		this.cleCryptageCp = cleCryptageCp;
+	public void setCle_cryptage_cp(String cle_cryptage_cp) {
+		this.cle_cryptage_cp = cle_cryptage_cp;
 	}
-
 	@Override
 	public String toString() {
-		return "Params [id=" + id + ", cleCryptagePwd=" + cleCryptagePwd + ", cleCryptageCp=" + cleCryptageCp + "]";
+		return "Params [id=" + id + ", cle_cryptage_pwd=" + cle_cryptage_pwd + ", cle_cryptage_cp=" + cle_cryptage_cp
+				+ "]";
 	}
-
+	
+	
 }

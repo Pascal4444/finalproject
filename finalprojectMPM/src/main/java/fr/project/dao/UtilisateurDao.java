@@ -24,15 +24,15 @@ public class UtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public List<Utilisateur> getUtilisateur() throws SQLException {
-		List<Utilisateur> listuser = new ArrayList<>();
+	public List<User> getUtilisateur() throws SQLException {
+		List<User> listuser = new ArrayList<>();
 		
 		String request = "SELECT * FROM adresse";
 		connexion = MDB.getConnection();
 		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			Utilisateur user = new Utilisateur();
+			User user = new User();
 			user.setId(rs.getInt(1));
 			user.setNom(rs.getString(2));
 			user.setPrenom(rs.getString(3));
@@ -52,13 +52,13 @@ public class UtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur getUtilisateurById(Integer id) throws SQLException {
+	public User getUtilisateurById(Integer id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Utilisateur addUtilisateur(Utilisateur user) throws Exception {
+	public User addUtilisateur(User user) throws Exception {
 		String request = "Insert into utilisateur(nom, prenom, date_naissance, profil, email, password, telephone, adresses_default, cartes_de_paiement, commentaires)values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		connexion = MDB.getConnection();
 		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
@@ -90,7 +90,7 @@ public class UtilisateurDao implements IUtilisateurDao {
 	}
 
 	@Override
-	public Utilisateur getUserByEmail(String email) throws Exception {
+	public User getUserByEmail(String email) throws Exception {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
@@ -99,9 +99,9 @@ public class UtilisateurDao implements IUtilisateurDao {
 			ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
-			Utilisateur user = null;
+			User user = null;
 			if (rs != null && rs.next()) {
-				user = new Utilisateur();
+				user = new User();
 				user.setId(rs.getInt("id"));
 				user.setNom(rs.getString("nom"));
 				user.setPrenom(rs.getString("prenom"));

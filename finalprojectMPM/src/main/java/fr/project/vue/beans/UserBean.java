@@ -22,7 +22,7 @@ public class UserBean {
 	private String profil;
 	
 	private final IUserMetier userMetier = new UserMetier();
-	private Utilisateur connectedUser;
+	private User connectedUser;
 	private String errorMessage;
 	
 	public UserBean() {
@@ -30,7 +30,7 @@ public class UserBean {
 
 	public String addUser() {
 		
-		Utilisateur user = new Utilisateur();
+		User user = new User();
 		//...
 		
 		try {

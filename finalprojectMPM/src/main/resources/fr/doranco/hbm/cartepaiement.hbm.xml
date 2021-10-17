@@ -3,22 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="fr.doranco.eboutique.entity.Adresse" table="adresse">
+	<class name="fr.doranco.eboutique.entity.CartePaiement" table="carte_paiement">
 		<id name="id" type="java.lang.Integer">
 			<column name="id" sql-type="int(11)"></column>
 			<generator class="increment"></generator>
 		</id>
-		<property name="numero" type="java.lang.Integer">
-			<column name="numero" sql-type="int(4)"></column>
+		<property name="rue" type="java.lang.String">
+			<column name="nom_proprietaire" sql-type="varchar(10)"></column>
 		</property>
 		<property name="rue" type="java.lang.String">
-			<column name="rue" sql-type="varchar(45)"></column>
+			<column name="prenom_proprietaire" sql-type="varchar(45)"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="numero" sql-type="BLOB"></column>
 		</property>
 		<property name="ville" type="java.lang.String">
-			<column name="ville" sql-type="varchar(20)"></column>
+			<column name="date_fin_validite" sql-type="DATE"></column>
 		</property>
 		<property name="codePostal" type="java.lang.String">
-			<column name="code_postal" sql-type="varchar(5)"></column>
+			<column name="cryptogramme" sql-type="BLOB"></column>
+		</property>
+		<property name="numero" type="java.lang.Integer">
+			<column name="utilisateur" sql-type="int(11)"></column>
 		</property>
 
 	</class>

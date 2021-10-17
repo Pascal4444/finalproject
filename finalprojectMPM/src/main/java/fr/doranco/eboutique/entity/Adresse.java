@@ -46,7 +46,7 @@ public class Adresse {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private int user_id = utilisateur.getId();
+	private int user_id;
 	
 
 	public Adresse() {}
@@ -104,7 +104,10 @@ public class Adresse {
 
 	public void setUtilisateur(User utilisateur) {
 		this.utilisateur = utilisateur;
+		this.user_id = utilisateur.getId();
 	}
+	
+	
 	
 	@Override
 	public String toString() {

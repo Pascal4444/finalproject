@@ -8,17 +8,35 @@
 			<column name="id" sql-type="int(11)"></column>
 			<generator class="increment"></generator>
 		</id>
+		<property name="rue" type="java.lang.String">
+			<column name="numero" sql-type="varchar(45)"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="date_creation" sql-type="DATE"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="date_livraison" sql-type="DATE"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="total_remise" sql-type="DOUBLE"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="frais_expedition" sql-type="DOUBLE"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="total_general" sql-type="DOUBLE"></column>
+		</property>
+		<property name="ville" type="java.lang.String">
+			<column name="adresse_facturation" sql-type="varchar(45)"></column>
+		</property>
+		<property name="codePostal" type="java.lang.String">
+			<column name="adresse_livraison" sql-type="varchar(45)"></column>
+		</property>
 		<property name="numero" type="java.lang.Integer">
 			<column name="numero" sql-type="int(4)"></column>
 		</property>
-		<property name="rue" type="java.lang.String">
-			<column name="rue" sql-type="varchar(45)"></column>
-		</property>
-		<property name="ville" type="java.lang.String">
-			<column name="ville" sql-type="varchar(20)"></column>
-		</property>
-		<property name="codePostal" type="java.lang.String">
-			<column name="code_postal" sql-type="varchar(5)"></column>
+		<property name="numero" type="java.lang.Integer">
+			<column name="numero" sql-type="int(4)"></column>
 		</property>
 
 	</class>

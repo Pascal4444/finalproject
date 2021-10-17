@@ -171,8 +171,8 @@ CREATE TABLE `commande` (
   `total_remise` DOUBLE NOT NULL,
   `frais_expedition` DOUBLE NOT NULL,
   `total_general` DOUBLE NOT NULL,
-  `adresse_facturation` varchar(45) NOT NULL,
-  `adresse_livraison` varchar(45) NOT NULL,
+  `adresse_facturation` int(11) NOT NULL,
+  `adresse_livraison` int(11) NOT NULL,
   `carte_paiement_default` int NOT NULL,
   `utilisateur` int(11) NOT NULL,
   PRIMARY KEY (`id`)

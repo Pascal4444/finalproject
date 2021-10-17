@@ -20,9 +20,9 @@
 		<property name="codePostal" type="java.lang.String">
 			<column name="codePostal" sql-type="varchar(5)"></column>
 		</property>
-		<!-- <property name="user" type="java.lang.User">
+		<property name="user_id" type="java.lang.User">
 			<column name="user_id" sql-type="int(11)"></column>
-		</property> -->
+		</property>
 	</class>
 
 </hibernate-mapping>

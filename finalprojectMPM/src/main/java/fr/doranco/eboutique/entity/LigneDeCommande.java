@@ -1,28 +1,51 @@
 package fr.doranco.eboutique.entity;
-import fr.doranco.eboutique.entity.Commande;
 
-public class LigneDeCommande {
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+
+	public class LigneDeCommande {
+		
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Double prixArticle;
-	
-	private Double remiseArticle;
-	
+	@NotEmpty
+	@Column(name = "quantite", length = 100, nullable = false)
 	private Integer quantite;
 	
+	@NotEmpty
+	@Column(name = "prixUnitaire", length = 200, nullable = false)
+	private Float prixUnitaire;
+	
+	@Column(name = "remiseArticle", nullable = false)
+	private Float remiseArticle;
+
+	@NotEmpty
+	@Column(name = "commande", nullable = false)
 	private Commande commande;
 	
-	private Article article;
+	@Column(name = "article", nullable = false)
+	private List<Article> article;
 	
-	public LigneDeCommande() {
-	}
+	@OneToMany(mappedBy = "ligneDeCommande", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Article> articles;
 
-	public LigneDeCommande(Double prixArticle, Integer quantite, Double remiseArticle) {
-		
-		this.prixArticle = prixArticle;
-		this.quantite = quantite;
-		this.remiseArticle = remiseArticle;
+
+	public LigneDeCommande() {
+		this.articles = new ArrayList<Article>();
 	}
 
 	public Integer getId() {
@@ -31,22 +54,6 @@ public class LigneDeCommande {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-	
-	public Article getArticle() {
-		return article;
-	}
-
-	public void setArticle(Article article) {
-		this.article = article;
-	}
-
-	public Double getPrixArticle() {
-		return prixArticle;
-	}
-
-	public void setPrixArticle(Double prixArticle) {
-		this.prixArticle = prixArticle;
 	}
 
 	public Integer getQuantite() {
@@ -57,6 +64,26 @@ public class LigneDeCommande {
 		this.quantite = quantite;
 	}
 
+	public Float getPrixUnitaire() {
+		return prixUnitaire;
+	}
+
+	public void setPrixUnitaire(Float prixUnitaire) {
+		this.prixUnitaire = prixUnitaire;
+	}
+
+	public Float getRemiseArticle() {
+		return remiseArticle;
+	}
+
+	public void setRemiseArticle(Float remiseArticle) {
+		this.remiseArticle = remiseArticle;
+	}
+	
+	public List<Article> getArticles() {
+		return articles;
+	}
+	
 	public Commande getCommande() {
 		return commande;
 	}
@@ -64,20 +91,12 @@ public class LigneDeCommande {
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
-
-	public Double getRemiseArticle() {
-		return remiseArticle;
-	}
-
-	public void setRemiseArticle(Double remiseArticle) {
-		this.remiseArticle = remiseArticle;
-	}
-
+		
+	
 	@Override
 	public String toString() {
-		return "LigneDeCommande [id=" + id + ", prixArticle=" + prixArticle + ", remiseArticle=" + remiseArticle
-				+ ", quantite=" + quantite + ", commande=" + commande + ", article=" + article + "]";
+		return "LigneDeCommande [id=" + id + ", quantite=" + quantite + ", prixUnitaire=" + prixUnitaire
+				+ ", remiseArticle=" + remiseArticle + ", commande=" + commande + "]";
 	}
-	
-	
+  
 }

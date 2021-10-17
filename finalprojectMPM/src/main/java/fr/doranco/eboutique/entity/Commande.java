@@ -1,37 +1,80 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Commande {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+
+@Entity
+@Table(name = "commande")
+public class Commande<ligneDeCommande, lignesCommande> {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@NotEmpty
+	@Column(name = "numero", length = 11, nullable = false)
 	private String numero;
 	
-	private Date dateCommande;
-	
+	@NotNull
+	@Column(name = "dateCreation", nullable = false)
+	private Date dateCreation;
+
+	@NotNull
+	@Column(name = "dateLivraison", nullable = false)
 	private Date dateLivraison;
+
+	@NotNull
+	@Column(name = "totalRemise", nullable = false)
+	private Float totalRemise;
+
+	@NotNull
+	@Column(name = "fraisExpedition", nullable = false)
+	private Float fraisExpedition;
+    
+	@NotNull
+	@Column(name = "totalGeneral", nullable = false)
+	private Float totalGeneral;
 	
-	private Double totalRemise;
-	
-	private Double fraisExpedition;
-	
-	private Double total_general;
-	
+	@NotNull
+	@Column(name = "carteDePaiementDefaut", nullable = false)
+	private CartePaiement carteDePaiementDefaut;
+		
+	@OneToOne
+	@JoinColumn(name = "adresse-facturation_id", nullable = false)
 	private Adresse adresseFacturation;
 	
+	@OneToOne
+	@JoinColumn(name = "adresse-livraison_id", nullable = false)
 	private Adresse adresseLivraison;
-	
-	private Integer cartePaiementDefaut;
-	
-	private User utilisateur;
-	
-	private List<LigneDeCommande> lignesDeCommande;
 
+	@OneToOne
+	@JoinColumn(name = "lignesCommande", nullable = false)
+	private List<ligneDeCommande> lignesCommande;
+	
+//	private List<LignesCommande> lignesCommandeList;
+	
+	@ManyToOne
+	@JoinColumn(name = "utilisateur_id", nullable = false)
+	private User utilisateur;
+
+	
 	public Commande() {
-		this.lignesDeCommande = new ArrayList<LigneDeCommande>();
 	}
 
 	public Integer getId() {
@@ -50,12 +93,12 @@ public class Commande {
 		this.numero = numero;
 	}
 
-	public Date getDateCommande() {
-		return dateCommande;
+	public Date getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setDateCommande(Date dateCommande) {
-		this.dateCommande = dateCommande;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public Date getDateLivraison() {
@@ -66,31 +109,31 @@ public class Commande {
 		this.dateLivraison = dateLivraison;
 	}
 
-	public Double getTotalRemise() {
+	public Float getTotalRemise() {
 		return totalRemise;
 	}
 
-	public void setTotalRemise(Double totalRemise) {
+	public void setTotalRemise(Float totalRemise) {
 		this.totalRemise = totalRemise;
 	}
 
-	public Double getFraisExpedition() {
+	public Float getFraisExpedition() {
 		return fraisExpedition;
 	}
 
-	public void setFraisExpedition(Double fraisExpedition) {
+	public void setFraisExpedition(Float fraisExpedition) {
 		this.fraisExpedition = fraisExpedition;
 	}
 
-	public Double getTotal_general() {
-		return total_general;
+	public Float getTotalGeneral() {
+		return totalGeneral;
 	}
 
-	public void setTotal_general(Double total_general) {
-		this.total_general = total_general;
+	public void setTotalGeneral(Float totalGeneral) {
+		this.totalGeneral = totalGeneral;
 	}
-
-	public Adresse getAdresseFacturation() {
+		
+	public Adresse getAdresseFacturaion() {
 		return adresseFacturation;
 	}
 
@@ -106,14 +149,14 @@ public class Commande {
 		this.adresseLivraison = adresseLivraison;
 	}
 
-	public Integer getCartePaiementDefaut() {
-		return cartePaiementDefaut;
+	public CartePaiement getCartePaiementDefaut() {
+		return carteDePaiementDefaut;
 	}
 
-	public void setCartePaiementDefaut(Integer cartePaiementDefaut) {
-		this.cartePaiementDefaut = cartePaiementDefaut;
+	public void setCartePaiementDefaut(CartePaiement cartePaiementDefaut) {
+		this.carteDePaiementDefaut = cartePaiementDefaut;
 	}
-
+	
 	public User getUtilisateur() {
 		return utilisateur;
 	}
@@ -121,23 +164,36 @@ public class Commande {
 	public void setUtilisateur(User utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-
-	public List<LigneDeCommande> getLignesDeCommande() {
-		return lignesDeCommande;
+	
+	public List<ligneDeCommande> getLignesCommande() {
+		return lignesCommande;
 	}
 
-	public void setLignesDeCommande(List<LigneDeCommande> lignesDeCommande) {
-		this.lignesDeCommande = lignesDeCommande;
+	public void setLignesCommande(List<ligneDeCommande> lignesCommande) {
+		this.lignesCommande = lignesCommande;
+	}
+
+	
+	public CartePaiement getCarteDePaiementDefaut() {
+		return carteDePaiementDefaut;
+	}
+
+	public void setCarteDePaiementDefaut(CartePaiement carteDePaiementDefaut) {
+		this.carteDePaiementDefaut = carteDePaiementDefaut;
+	}
+
+	public Adresse getAdresseFacturation() {
+		return adresseFacturation;
 	}
 
 	@Override
 	public String toString() {
-		return "Commande [id=" + id + ", numero=" + numero + ", dateCommande=" + dateCommande + ", dateLivraison="
+		int cartePaiementDefaut = this.carteDePaiementDefaut.getId();
+		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="
 				+ dateLivraison + ", totalRemise=" + totalRemise + ", fraisExpedition=" + fraisExpedition
-				+ ", total_general=" + total_general + ", adresseFacturation=" + adresseFacturation
-				+ ", adresseLivraison=" + adresseLivraison + ", cartePaiementDefaut=" + cartePaiementDefaut + ", ="
-				+ utilisateur + ", lignesDeCommande=" + lignesDeCommande + "]";
+				+ ", totalGeneral=" + totalGeneral + ", adresseFacturation=" + adresseFacturation
+				+ ", adresseLivraison=" + adresseLivraison + ", cartePaiementDefaut=" + cartePaiementDefaut
+				+ ", utilisateur=" + utilisateur + ", lignesCommande=" + lignesCommande + "]";
 	}
-	
 
 }

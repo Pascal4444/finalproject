@@ -1,50 +1,67 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-public class User {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+
+@Entity
+@Table(name = "utilisateur")
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
-	
-	private String genre;
-	
+
+	@NotEmpty
 	private String nom;
-	
+
+	@NotEmpty
 	private String prenom;
-	
+
+	@NotNull
+	@Column(name = "date_naissance")
+	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
-	
-	private String isActif;
-	
-	
+	private Boolean isActif;
 	private String profil;
-	
 	private String email;
-	
 	private byte[] password;
-	
 	private String telephone;
 	
-	private Adresse adressedefault;
 	
-	private List<Adresse> adresses;
-	
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Commande> commandes;
+
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<CartePaiement> cartesDePaiement;
 	
-	private CartePaiement cartePaiementdefault;
-	
-	private List<CartePaiement> cartesPaiement;
-	
-	// On se commente sois-meme
-	private String commentaires;
-	
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Commentaire> commentaires;
+
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<ArticlePanier> panier;
+
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private List<Adresse> adresses;
+
+	private String utilisateur;
+
+		
 	public User() {
-		this.commandes = new ArrayList<Commande>();
-		this.adresses = new ArrayList<Adresse>();
-		this.cartesPaiement = new ArrayList<CartePaiement>();
 	}
 
 	public Integer getId() {
@@ -53,14 +70,6 @@ public class User {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
 	}
 
 	public String getNom() {
@@ -87,12 +96,12 @@ public class User {
 		this.dateNaissance = dateNaissance;
 	}
 
-	public String getIsActif() {
+	public Boolean getIsActif() {
 		return isActif;
 	}
 
-	public void setIsActif(String active) {
-		this.isActif = active;
+	public void setIsActif(Boolean isActif) {
+		this.isActif = isActif;
 	}
 
 	public String getProfil() {
@@ -127,72 +136,36 @@ public class User {
 		this.telephone = telephone;
 	}
 
-	public List<Adresse> getAdresses() {
-		return adresses;
-	}
-
-	public void setAdresses(List<Adresse> adresses) {
-		this.adresses = adresses;
-	}
-
 	public List<Commande> getCommandes() {
 		return commandes;
 	}
 
-	public void setCommandes(List<Commande> commandes) {
-		this.commandes = commandes;
+	public List<CartePaiement> getCartesDePaiement() {
+		return cartesDePaiement;
 	}
 
-	public List<CartePaiement> getCartesPaiement() {
-		return cartesPaiement;
-	}
-
-	public void setCartesPaiement(List<CartePaiement> cartesPaiement) {
-		this.cartesPaiement = cartesPaiement;
-	}
-
-	public String getCommentaires() {
+	public List<Commentaire> getCommentaires() {
 		return commentaires;
 	}
 
-	public void setCommentaires(String commentaires) {
-		this.commentaires = commentaires;
+	public List<ArticlePanier> getPanier() {
+		return panier;
 	}
 	
-	public Adresse getAdressedefault() {
-		return adressedefault;
+	public String getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setAdressedefault(Adresse adressedefault) {
-		this.adressedefault = adressedefault;
-		if (adresses.contains(adressedefault)) {
-		    System.out.println("Adresse existant");
-		} else {
-		    System.out.println("Enregistrement de l'adresse");
-		    adresses.add(adressedefault);
-		}
+	public void setUtilisateur(String utilisateur) {
+		this.utilisateur = utilisateur;
 	}
-
 	
-	public CartePaiement getCartePaiementdefault() {
-		return cartePaiementdefault;
-	}
-
-	public void setCartePaiementdefault(CartePaiement cartePaiementdefault) {
-		this.cartePaiementdefault = cartePaiementdefault;
-		if (cartesPaiement.contains(cartePaiementdefault)) {
-		    System.out.println("Moyen existant");
-		} else {
-		    System.out.println("Enregistrement du moyen de payement");
-		    cartesPaiement.add(cartePaiementdefault);
-		}
-	}
 
 	@Override
 	public String toString() {
-		return "U [id=" + id + ", genre=" + genre + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance="
-				+ dateNaissance + ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password="
-				+ Arrays.toString(password) + ", telephone=" + telephone + "]";
+		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
+				+ ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password=" + password
+				+ ", telephone=" + telephone + "]";
 	}
-
+	
 }

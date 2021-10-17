@@ -1,20 +1,52 @@
 package fr.doranco.eboutique.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name = "categorie")
 public class Categorie {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty
+	@Column(name = "nom", length = 30, nullable = false)
 	private String nom;
 	
-	private Integer remise;
+	@NotEmpty
+	@Column(name = "remise", length = 10, nullable = false)
+	private String remise;
 	
-	private Boolean iscumulable;
+	@NotEmpty
+	@Column(name = "remiseCumulable", length = 10, nullable = false)
+	private String remiseCumulable;
 	
-	private String articles;
+	@NotEmpty
+	@Column(name = "description", length = 200, nullable = false)
+	private String description;
 	
-	private String photo;
+	@Column(name = "photo", nullable = true)
+	private byte[] photo;
 
-	
+	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Article> articles;
+
 	public Categorie() {
+		this.articles = new ArrayList<Article>();
 	}
 
 	public Integer getId() {
@@ -33,44 +65,40 @@ public class Categorie {
 		this.nom = nom;
 	}
 
-	public Integer getRemise() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRemise() {
 		return remise;
 	}
 
-	public void setRemise(Integer remise) {
+	public void setRemise(String remise) {
 		this.remise = remise;
 	}
 
-	public String getArticles() {
-		return articles;
+	public String getRemiseCumulable() {
+		return remiseCumulable;
 	}
 
-	public void setArticles(String articles) {
-		this.articles = articles;
+	public void setRemiseCumulable(String remiseCumulable) {
+		this.remiseCumulable = remiseCumulable;
 	}
 
-	public Boolean getIscumulable() {
-		return iscumulable;
-	}
-
-	public void setIscumulable(Boolean iscumulable) {
-		this.iscumulable = iscumulable;
-	}
-	
-	public String getPhoto() {
+	public byte[] getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(String photo) {
+	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
 
-	@Override
-	public String toString() {
-		return "Categorie [id=" + id + ", nom=" + nom + ", remise=" + remise + ", iscumulable=" + iscumulable
-				+ ", articles=" + articles + ", photo=" + photo + "]";
+	public List<Article> getArticles() {
+		return articles;
 	}
-
 	
-
 }

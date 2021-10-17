@@ -1,34 +1,69 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class Article {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import fr.doranco.eboutique.entity.Categorie;
+
+@Entity
+@Table(name = "article")
+@NamedQueries({
+	@NamedQuery(name = "Article:findByCategoryId",
+			query = "FROM Article a WHERE a.category.id = :id"),
+	@NamedQuery(name = "Article:findByCategoryName",
+	query = "FROM Article a WHERE a.category.name = :name")
+})
+public class Article {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@NotEmpty
+	@Column(name = "nom", length = 30, nullable = false)
 	private String nom;
 	
+	@NotEmpty
+	@Column(name = "description", length = 500, nullable = false)
 	private String description;
 	
-	private Double prix;
+	@Column(name = "prix", nullable = false)
+	private Float prix;
 	
+	@Column(name = "remise", length = 2, nullable = false)
 	private Integer remise;
 	
-	private Integer stock;
+	@Column(name = "stock", nullable = false)
+	private String stock;
 	
+	@Column(name = "isVendable", nullable = false)
 	private Boolean isVendable;
 	
-	private String photos;
 	
-	private String videos;
+	@Column(name = "photo", nullable = true)
+	private byte[] photo;
+
+	@Column(name = "video", nullable = true)
+	private byte[] video;
 	
-	private List<Commentaire> commentaires;
-	
+	@ManyToOne
+	@JoinColumn(name = "categorie_id", nullable = false)
 	private Categorie categorie;
 	
 	public Article() {
-		this.commentaires = new ArrayList<Commentaire>();
 	}
 
 	public Integer getId() {
@@ -55,11 +90,11 @@ public class Article {
 		this.description = description;
 	}
 
-	public Double getPrix() {
+	public Float getPrix() {
 		return prix;
 	}
 
-	public void setPrix(Double prix) {
+	public void setPrix(Float prix) {
 		this.prix = prix;
 	}
 
@@ -71,14 +106,14 @@ public class Article {
 		this.remise = remise;
 	}
 
-	public Integer getStock() {
+	public String getStock() {
 		return stock;
 	}
 
-	public void setStock(Integer stock) {
+	public void setStock(String stock) {
 		this.stock = stock;
 	}
-
+	
 	public Boolean getIsVendable() {
 		return isVendable;
 	}
@@ -86,44 +121,29 @@ public class Article {
 	public void setIsVendable(Boolean isVendable) {
 		this.isVendable = isVendable;
 	}
-
-	public List<Commentaire> getCommentaires() {
-		return commentaires;
+	
+	public byte[] getPhoto() {
+		return photo;
 	}
 
-	public void setCommentaires(List<Commentaire> commentaires) {
-		this.commentaires = commentaires;
-	}
-
-	public Categorie getCategorie() {
-		return categorie;
-	}
-
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
 	}
 	
-	public String getPhotos() {
-		return photos;
+	public byte[] getVideo() {
+		return video;
 	}
 
-	public void setPhotos(String photos) {
-		this.photos = photos;
+	public void setVideo(byte[] video) {
+		this.video = video;
 	}
-
-	public String getVideos() {
-		return videos;
-	}
-
-	public void setVideos(String videos) {
-		this.videos = videos;
-	}
+	
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", nom=" + nom + ", description=" + description + ", prix=" + prix + ", remise="
-				+ remise + ", stock=" + stock + ", isVendable=" + isVendable + "]";
+		return "Article [id=" + id + ", nom=" + nom + ", description=" + description + ", prix="
+				+ prix + ", remise=" + remise + ", stock=" + stock + ", isVendable=" + isVendable + ", photo=" + Arrays.toString(photo)
+				+ ", video=" + Arrays.toString(video) + "]";
 	}
-	
 	
 }

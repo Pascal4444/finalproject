@@ -17,24 +17,6 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public User getUserByEmail(String email) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateUser(User utilisateur) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void removeUser(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public User getUserById(Integer id) throws Exception{
 		Session session = HibernateConnector.getSession();
 		return session.find(User.class, id);
@@ -67,6 +49,24 @@ public class UserDao implements IUserDao {
 				session.close();
 			}
 		}
+	}
+
+	@Override
+	public User getUserByEmail(String email) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateUser(User utilisateur) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeUser(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

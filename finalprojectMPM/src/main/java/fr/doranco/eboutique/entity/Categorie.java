@@ -12,10 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "categorie")
 public class Categorie {
@@ -29,13 +27,11 @@ public class Categorie {
 	private String nom;
 	
 	// remise en %
-	@NotEmpty
-	@Column(name = "remise", length = 10, nullable = false)
+	@Column(name = "remise", length = 3, nullable = true)
 	private int remise;
 	
-	@NotEmpty
-	@Column(name = "remiseCumulable", length = 10, nullable = false)
-	private Boolean remiseCumulable;
+	@Column(name = "remiseCumulable", columnDefinition="tinyint(1) default 0" , nullable = true)
+	private boolean remiseCumulable;
 	
 	@NotEmpty
 	@Column(name = "description", length = 200, nullable = false)

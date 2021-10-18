@@ -3,9 +3,9 @@ package fr.doranco.eboutique.vue.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import fr.doranco.eboutique.entity.User;
-import fr.doranco.eboutique.metier.IUserMetier;
-import fr.doranco.eboutique.metier.UserMetier;
+import fr.doranco.eboutique.pojo.Utilisateur;
+import fr.doranco.eboutique.metier.IUtilisateurMetier;
+import fr.doranco.eboutique.metier.UtilisateurMetier;
 
 @ManagedBean(name = "loginBean")
 public class LoginBean {
@@ -19,7 +19,7 @@ public class LoginBean {
 	@ManagedProperty(name = "errorMessage", value = "")
 	private String errorMessage;
 
-	private final IUserMetier userMetier = new UserMetier();
+	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
 	
 	public LoginBean() {
 	}
@@ -27,8 +27,8 @@ public class LoginBean {
 	public String seConnecter() {
 		
 		try {
-			User user = userMetier.seConnecter(email, password);
-			if (user == null) {
+			Utilisateur utilisateur = (Utilisateur) utilisateurMetier.seConnecter(email, password);
+			if (utilisateur == null) {
 				this.errorMessage = "Email et/ou Mot de passe incorrects ! Veuillez réessayer.";
 				return "";
 			}

@@ -12,6 +12,7 @@ public class Main {
 			Session session = HibernateConnector.getSession();
 			System.out.println(session);
 			System.out.println("Session Hibernate démarrée avec succès !");
+			session.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}

@@ -6,11 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotEmpty;
-// import javax.persistence.ManyToOne;
-// import javax.persistence.OneToOne;
 
 @Entity
 @Table(name = "articlePanier")
@@ -24,19 +23,25 @@ public class ArticlePanier {
 	 **    relation Bidirectionnelle    **
 	**/
 	
-	@NotNull
+	@OneToOne
 	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 	
-	@NotEmpty
-	@Column(name = "quantite", length = 45, nullable = false)
+	@NotNull
+	@Column(name = "quantite", length = 3, nullable = false)
 	private Integer quantite;
 	
-	@NotEmpty
-	@Column(name = "utilisateur", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
 	private User utilisateur;
 	
 	public ArticlePanier() {
+	}
+
+	public ArticlePanier(Article article, Integer quantite, User utilisateur) {
+		this.article = article;
+		this.quantite = quantite;
+		this.utilisateur = utilisateur;
 	}
 
 	public Integer getId() {
@@ -71,13 +76,6 @@ public class ArticlePanier {
 		this.utilisateur= utilisateur;
 	}
 
-	public ArticlePanier(Integer id, Article article, Integer quantite, User utilisateur) {
-		this.id = id;
-		this.article = article;
-		this.quantite = quantite;
-		this.utilisateur = utilisateur;
-	}
-	
 	@Override
 	public String toString() {
 		return "ArticlePanier [id=" + id + ", article=" + article + ", quantite=" + quantite + ", utilisateur="

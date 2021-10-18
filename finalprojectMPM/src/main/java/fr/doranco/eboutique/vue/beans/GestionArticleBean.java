@@ -1,19 +1,21 @@
-package fr.project.vue.beans;
+package fr.doranco.eboutique.vue.beans;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import fr.project.entity.Utilisateur;
-import fr.project.metier.IUserMetier;
-import fr.project.metier.UserMetier;
+import fr.doranco.eboutique.pojo.Utilisateur;
+import fr.doranco.eboutique.metier.IUtilisateurMetier;
+import fr.doranco.eboutique.metier.UtilisateurMetier;
 
-@ManagedBean(name = "userBean")
+@ManagedBean(name = "utilisateurBean")
 @SessionScoped
-public class UserBean {
+public class GestionArticleBean {
 
-	private String genre;
 	private String nom;
 	private String prenom;
 	private String dateNaissance;
@@ -21,20 +23,20 @@ public class UserBean {
 	private String password;
 	private String profil;
 	
-	private final IUserMetier userMetier = new UserMetier();
-	private User connectedUser;
+	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
+	private Utilisateur connectedUtilisateur;
 	private String errorMessage;
 	
-	public UserBean() {
+	public GestionArticleBean() {
 	}
 
-	public String addUser() {
+	public String addUtilisateur() {
 		
-		User user = new User();
-		//...
+		Utilisateur utilisateur = new Utilisateur();
+		//
 		
 		try {
-			connectedUser = userMetier.addUser(user);
+			connectedUtilisateur = (Utilisateur) utilisateurMetier.addUtilisateur(utilisateur);
 			return "login.xhtml";
 		} catch (Exception e) {
 			this.errorMessage = "Erreur technique, veuillez réessayer plus tard\n"
@@ -44,14 +46,10 @@ public class UserBean {
 		
 	}
 	
-	public String getGenre() {
-		return genre;
+	public List<String> getProfils() {
+		return new ArrayList<String>(Arrays.asList("", "Client", "Magasinier", "Admin"));
 	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-
+	
 	public String getNom() {
 		return nom;
 	}
@@ -100,12 +98,12 @@ public class UserBean {
 		this.profil = profil;
 	}
 
-	public User getConnectedUser() {
-		return connectedUser;
+	public Utilisateur getConnectedUtilisateur() {
+		return connectedUtilisateur;
 	}
 
-	public void setConnectedUser(User connectedUser) {
-		this.connectedUser = connectedUser;
+	public void setConnectedUtilisateur(Utilisateur connectedUtilisateur) {
+		this.connectedUtilisateur = connectedUtilisateur;
 	}
 
 	public String getErrorMessage() {

@@ -10,7 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+//import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,43 +45,55 @@ public class User {
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	
-	@Column(name = "isactif")
-	private Boolean isActif;
+	@Column(name = "actif", columnDefinition="tinyint(1) default 1")
+	private boolean isActif;
 	
-	@NotNull
+	@NotEmpty
 	@Column(name = "profil")
 	private String profil;
 	
-	@NotNull
+	@NotEmpty
 	@Column(name = "email")
 	private String email;
 	
 	@NotNull
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private byte[] password;
 	
+	@NotEmpty
 	@Column(name = "telephone")
 	private String telephone;
-	
 	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Commande> commandes;
 
+	@OneToOne
+	@JoinColumn(name = "carte_paiement_default", nullable = false)
+	private CartePaiement carteDePaiementDefault;
+	
+	@OneToOne
+	@JoinColumn(name = "adresse_facturation_default", nullable = false)
+	private Adresse adresseFacturationDefault;
+	
+	@OneToOne
+	@JoinColumn(name = "adresse_livraison_default", nullable = false)
+	private Adresse adresseLivraisonDefault;
+	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<CartePaiement> cartesDePaiement;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Commentaire> listcommentaires;
+	private List<Commentaire> commentaires;
 	
-	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<ArticlePanier> panier;
 
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Adresse> adresses;
 	
 	// Phrase introduction
-	@Column(name = "commentaires")
-	private String commentaires;
+	@Column(name = "commentaire")
+	private String commentaire;
 	
 	public User() {
 	}
@@ -161,28 +178,12 @@ public class User {
 		return cartesDePaiement;
 	}
 
-	public List<Commentaire> getListcommentaires() {
-		return listcommentaires;
-	}
-
-	public void setListcommentaires(List<Commentaire> listcommentaires) {
-		this.listcommentaires = listcommentaires;
-	}
-
 	public List<Adresse> getAdresses() {
 		return adresses;
 	}
 
 	public void setAdresses(List<Adresse> adresses) {
 		this.adresses = adresses;
-	}
-
-	public String getCommentaires() {
-		return commentaires;
-	}
-
-	public void setCommentaires(String commentaires) {
-		this.commentaires = commentaires;
 	}
 
 	public void setCommandes(List<Commande> commandes) {
@@ -196,13 +197,53 @@ public class User {
 	public List<ArticlePanier> getPanier() {
 		return panier;
 	}
-	
+
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public Adresse getAdresseFacturationDefault() {
+		return adresseFacturationDefault;
+	}
+
+	public void setAdresseFacturationDefault(Adresse adresseFacturationDefault) {
+		this.adresseFacturationDefault = adresseFacturationDefault;
+	}
+
+	public Adresse getAdresseLivraisonDefault() {
+		return adresseLivraisonDefault;
+	}
+
+	public void setAdresseLivraisonDefault(Adresse adresseLivraisonDefault) {
+		this.adresseLivraisonDefault = adresseLivraisonDefault;
+	}
+
+	public CartePaiement getCarteDePaiementDefault() {
+		return carteDePaiementDefault;
+	}
+
+	public void setCarteDePaiementDefault(CartePaiement carteDePaiementDefault) {
+		this.carteDePaiementDefault = carteDePaiementDefault;
+	}
 
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
-				+ ", isActif=" + isActif + ", profil=" + profil + ", email=" + email + ", password=" + password
-				+ ", telephone=" + telephone + "]";
+		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
+				+ ", profil=" + profil + ", email=" + email + ", telephone=" + telephone + ", commandes=" + commandes
+				+ ", commentaire=" + commentaire + "]";
 	}
+
 	
 }

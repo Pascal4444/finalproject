@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotEmpty;
 
 public class Params {
@@ -13,11 +14,13 @@ public class Params {
 	private Integer id;
 	
 	@NotEmpty
-	@Column(name = "cle_cryptage_pwd", nullable = false)
+	@Lob
+	@Column(name = "cle_cryptage_pwd", columnDefinition="bytea", nullable = false)
 	private Byte[] cle_cryptage_pwd;
 	
 	@NotEmpty
-	@Column(name = "cle_cryptage_cp", nullable = false)
+	@Lob
+	@Column(name = "cle_cryptage_cp", columnDefinition="bytea", nullable = false)
 	private Byte[] cle_cryptage_cp;
 	
 	

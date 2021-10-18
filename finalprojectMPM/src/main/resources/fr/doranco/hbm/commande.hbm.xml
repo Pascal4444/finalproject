@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="fr.doranco.eboutique.entity.Adresse" table="adresse">
+	<class name="fr.doranco.eboutique.entity.Commande" table="commande">
 		<id name="id" type="java.lang.Integer">
 			<column name="id" sql-type="int(11)"></column>
 			<generator class="increment"></generator>
@@ -27,16 +27,16 @@
 			<column name="total_general" sql-type="DOUBLE"></column>
 		</property>
 		<property name="ville" type="java.lang.String">
-			<column name="adresse_facturation" sql-type="varchar(45)"></column>
+			<column name="adresse_facturation" sql-type="int(11)"></column>
 		</property>
 		<property name="codePostal" type="java.lang.String">
-			<column name="adresse_livraison" sql-type="varchar(45)"></column>
+			<column name="adresse_livraison" sql-type="int(11)"></column>
 		</property>
 		<property name="numero" type="java.lang.Integer">
-			<column name="numero" sql-type="int(4)"></column>
+			<column name="carte_paiement_default" sql-type="int(11)"></column>
 		</property>
 		<property name="numero" type="java.lang.Integer">
-			<column name="numero" sql-type="int(4)"></column>
+			<column name="utilisateur" sql-type="int(11)"></column>
 		</property>
 
 	</class>

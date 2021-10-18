@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "adresse")
 @NamedQueries({
@@ -33,7 +34,7 @@ public class Adresse {
 	@NotEmpty
 	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
-	
+
 	@NotEmpty
 	@Column(name = "codePostal", length = 5, nullable = false)
 	private String codePostal;
@@ -41,12 +42,10 @@ public class Adresse {
 	@NotEmpty
 	@Column(name = "ville", length = 25, nullable = false)
 	private String ville;
-
-	private User utilisateur;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private int user_id;
+	private User utilisateur;
 	
 
 	public Adresse() {}
@@ -104,7 +103,6 @@ public class Adresse {
 
 	public void setUtilisateur(User utilisateur) {
 		this.utilisateur = utilisateur;
-		this.user_id = utilisateur.getId();
 	}
 	
 	

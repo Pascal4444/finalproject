@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE `categorie` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) NOT NULL,
-  `remise` int DEFAULT NULL,
+  `remise` int(3) DEFAULT NULL,
   `is_remise_cumulable` ENUM('true','false') Default 'false',
   `photo` varchar(45) NOT NULL,
   `articles` varchar(45) NOT NULL,
@@ -226,8 +226,8 @@ CREATE TABLE `ligne_de_commande` (
   `quantite` int(2) NOT NULL,
   `prix_unitaire` DOUBLE NOT NULL,
   `remise_article` DOUBLE NOT NULL,
-  `commande` varchar(45) NOT NULL,
-  `article` varchar(45) NOT NULL,
+  `commande` int(11) NOT NULL,
+  `article` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

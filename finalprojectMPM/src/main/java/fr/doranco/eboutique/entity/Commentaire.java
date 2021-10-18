@@ -1,20 +1,17 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "commentaire")
 public class Commentaire {
@@ -31,19 +28,16 @@ public class Commentaire {
 	@Column(name = "note", length = 1, nullable = false)
 	private Integer note;
 	
-	@Column(name = "article", nullable = true)
-	private List<Article> article;
+	@ManyToOne
+	@JoinColumn(name = "article", nullable = false)
+	private Article article;
 
-	@NotEmpty
-	@Column(name = "utilisateur", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "utilisateur", nullable = false)
 	private User utilisateur;
-	
-	@OneToMany(mappedBy = "commentaire", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Article> articles;
 
 
 	public Commentaire() {
-		this.articles = new ArrayList<Article>();
 	}
 
 	public Integer getId() {
@@ -69,10 +63,6 @@ public class Commentaire {
 	public void setNote(Integer note) {
 		this.note = note;
 	}
-
-	public List<Article> getArticles() {
-		return articles;
-	}
 	
 	public User getUtilisateur() {
 		return utilisateur;
@@ -81,7 +71,14 @@ public class Commentaire {
 	public void setUtilisateur(User utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
+
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
 
 	@Override
 	public String toString() {

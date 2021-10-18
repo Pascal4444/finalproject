@@ -1,5 +1,6 @@
 package fr.doranco.eboutique.entity;
 
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,13 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-// import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-@SuppressWarnings("deprecation")
 @Entity
-@Table(name = "cartePaiement")
+@Table(name = "carte_paiement")
 public class CartePaiement {
 
 	@Id
@@ -33,39 +32,24 @@ public class CartePaiement {
 	@Column(name = "nomProprietaire", length = 45, nullable = false)
 	private String nomProprietaire;
 	
-	@NotEmpty
-	@Column(name = "prenomProprietaire", length = 100, nullable = false)
-	private String prenomProprietaire;
+	@NotNull
+	@Column(name="numero", nullable = false)
+	private byte[] numero;
 	
-	@NotEmpty
-	@Column(name = "numero", length = 11, nullable = false)
-	private Byte[] numero;
-	
-	@NotEmpty
+	@NotNull
 	@Column(name = "dateFinValidite", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateFinValidite;
 	
-	@NotEmpty
-	@Column(name = "cryptogramme", length = 10, nullable = false)
-	private Byte[] cryptogramme;
+	@NotNull
+	@Column(name = "cryptogramme", nullable = false)
+	private byte[] cryptogramme;
 	
 	@ManyToOne
-	@JoinColumn(name = "utilisateur", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User utilisateur;
 
 	public CartePaiement() {
-	}
-	
-	public CartePaiement(Integer id, String nomProprietaire, String prenomProprietaire, @NotEmpty Byte[] numero,
-			Date dateFinValidite, @NotEmpty Byte[] cryptogramme, User utilisateur) {
-		this.id = id;
-		this.nomProprietaire = nomProprietaire;
-		this.prenomProprietaire = prenomProprietaire;
-		this.numero = numero;
-		this.dateFinValidite = dateFinValidite;
-		this.cryptogramme = cryptogramme;
-		this.utilisateur = utilisateur;
 	}
 
 	public Integer getId() {
@@ -76,14 +60,6 @@ public class CartePaiement {
 		this.id = id;
 	}
 
-	public @NotEmpty Byte[] getNumero() {
-		return numero;
-	}
-
-	public void setNumero(@NotEmpty Byte[] numero) {
-		this.numero = numero;
-	}
-
 	public String getNomProprietaire() {
 		return nomProprietaire;
 	}
@@ -92,27 +68,27 @@ public class CartePaiement {
 		this.nomProprietaire = nomProprietaire;
 	}
 
-	public String getPrenomProprietaire() {
-		return prenomProprietaire;
+	public byte[] getNumero() {
+		return numero;
 	}
 
-	public void setPrenomProprietaire(String prenomProprietaire) {
-		this.prenomProprietaire = prenomProprietaire;
+	public void setNumero(byte[] numero) {
+		this.numero = numero;
 	}
-	
+
 	public Date getDateFinValidite() {
 		return dateFinValidite;
 	}
 
 	public void setDateFinValidite(Date dateFinValidite) {
-		this.dateFinValidite= dateFinValidite;
+		this.dateFinValidite = dateFinValidite;
 	}
 
-	public @NotEmpty Byte[] getCryptogramme() {
+	public byte[] getCryptogramme() {
 		return cryptogramme;
 	}
 
-	public void setCryptogramme(@NotEmpty Byte[] cryptogramme) {
+	public void setCryptogramme(byte[] cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
 
@@ -123,10 +99,12 @@ public class CartePaiement {
 	public void setUtilisateur(User utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "CartePaiement [id=" + id + ", nomProprietaire=" + nomProprietaire + ", prenomProprietaire="
-				+ prenomProprietaire + ", numero=" + numero + ", dateFinValidite=" + dateFinValidite + "]";
+		return "CartePaiement [id=" + id + ", nomProprietaire=" + nomProprietaire + ", numero="
+				+ Arrays.toString(numero) + ", dateFinValidite=" + dateFinValidite + ", cryptogramme="
+				+ Arrays.toString(cryptogramme) + "]";
 	}
+	
 }

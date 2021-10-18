@@ -8,10 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "commentaire")
 public class Commentaire {
@@ -24,7 +24,7 @@ public class Commentaire {
 	@Column(name = "texte", length = 200, nullable = false)
 	private String texte;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name = "note", length = 1, nullable = false)
 	private Integer note;
 	

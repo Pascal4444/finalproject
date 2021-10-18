@@ -25,7 +25,7 @@ public class Adresse {
 	private Integer id;
 	
 	@NotEmpty
-	@Column(name = "numero", length = 4, nullable = false)
+	@Column(name = "numero", length = 5, nullable = false)
 	private String numero;
 	
 	@NotEmpty

@@ -1,16 +1,19 @@
 package fr.doranco.eboutique.entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-
-	@SuppressWarnings("deprecation")
+@Entity
+@Table(name = "ligne_commande")
 	public class LigneDeCommande {
 		
 	@Id
@@ -21,19 +24,19 @@ import org.hibernate.validator.constraints.NotEmpty;
 	@Column(name = "quantite", length = 100, nullable = false)
 	private Integer quantite;
 	
-	@NotEmpty
-	@Column(name = "prixUnitaire", length = 200, nullable = false)
+	@NotNull
+	@Column(name = "prixUnitaire",length = 10, precision = 2, nullable = false)
 	private double prixUnitaire;
 	
-	@Column(name = "remiseArticle", nullable = false)
+	@Column(name = "remiseArticle",length = 10, precision = 2, nullable = true)
 	private double remiseArticle;
 
 	@ManyToOne
-	@JoinColumn(name = "commande", nullable = false)
+	@JoinColumn(name = "commande_id", nullable = false)
 	private Commande commande;
 	
 	@OneToOne
-	@JoinColumn(name = "article", nullable = false)
+	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 
 

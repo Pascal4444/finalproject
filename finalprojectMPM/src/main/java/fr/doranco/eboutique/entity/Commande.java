@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -32,30 +34,31 @@ public class Commande {
 	private String numero;
 	
 	@NotNull
-	@Column(name = "dateCreation", nullable = false)
+	@Column(name = "date_creation", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date dateCreation;
 
 	@NotNull
-	@Column(name = "dateLivraison", nullable = false)
+	@Column(name = "date_livraison", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date dateLivraison;
 
 	// réduction en somme
 	@NotNull
-	@Column(name = "totalRemise", nullable = false)
+	@Column(name = "total_remise",length = 10, precision = 2, nullable = false)
 	private double totalRemise;
 
 	@NotNull
-	@Column(name = "fraisExpedition", nullable = false)
+	@Column(name = "frais_expedition",length = 10, precision = 2, nullable = false)
 	private double fraisExpedition;
     
 	@NotNull
-	@Column(name = "totalGeneral", nullable = false)
+	@Column(name = "total_general",length = 10, precision = 2, nullable = false)
 	private double totalGeneral;
 	
-	@NotNull
 	@OneToOne
-	@Column(name = "carteDePaiementDefaut", nullable = false)
-	private CartePaiement carteDePaiementDefaut;
+	@JoinColumn(name = "carte_paiement", nullable = false)
+	private CartePaiement carteDePaiement;
 		
 	@OneToOne
 	@JoinColumn(name = "adresse_facturation", nullable = false)
@@ -147,14 +150,6 @@ public class Commande {
 	public void setAdresseLivraison(Adresse adresseLivraison) {
 		this.adresseLivraison = adresseLivraison;
 	}
-
-	public CartePaiement getCartePaiementDefaut() {
-		return carteDePaiementDefaut;
-	}
-
-	public void setCartePaiementDefaut(CartePaiement cartePaiementDefaut) {
-		this.carteDePaiementDefaut = cartePaiementDefaut;
-	}
 	
 	public User getUtilisateur() {
 		return utilisateur;
@@ -172,22 +167,21 @@ public class Commande {
 		this.lignesCommande = lignesCommande;
 	}
 
-	
-	public CartePaiement getCarteDePaiementDefaut() {
-		return carteDePaiementDefaut;
-	}
-
-	public void setCarteDePaiementDefaut(CartePaiement carteDePaiementDefaut) {
-		this.carteDePaiementDefaut = carteDePaiementDefaut;
-	}
-
 	public Adresse getAdresseFacturation() {
 		return adresseFacturation;
+	}
+	
+	public CartePaiement getCarteDePaiement() {
+		return carteDePaiement;
+	}
+
+	public void setCarteDePaiement(CartePaiement carteDePaiement) {
+		this.carteDePaiement = carteDePaiement;
 	}
 
 	@Override
 	public String toString() {
-		int cartePaiementDefaut = this.carteDePaiementDefaut.getId();
+		int cartePaiementDefaut = this.carteDePaiement.getId();
 		return "Commande [id=" + id + ", numero=" + numero + ", dateCreation=" + dateCreation + ", dateLivraison="
 				+ dateLivraison + ", totalRemise=" + totalRemise + ", fraisExpedition=" + fraisExpedition
 				+ ", totalGeneral=" + totalGeneral + ", adresseFacturation=" + adresseFacturation

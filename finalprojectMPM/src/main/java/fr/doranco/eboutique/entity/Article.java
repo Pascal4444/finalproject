@@ -18,16 +18,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.annotations.ColumnDefault;
-
 
 @Entity
 @Table(name = "article")
 @NamedQueries({
-	@NamedQuery(name = "Article:findByCategoryId",
-			query = "FROM Article a WHERE a.category.id = :id"),
-	@NamedQuery(name = "Article:findByCategoryName",
-	query = "FROM Article a WHERE a.category.nom = :nom")
+	@NamedQuery(name = "Article:findByCategorieId",
+			query = "FROM Article a WHERE a.categorie.id = :id"),
+	@NamedQuery(name = "Article:findByCategorieName",
+	query = "FROM Article a WHERE a.categorie.nom = :nom")
 })
 public class Article {
 	
@@ -43,19 +41,20 @@ public class Article {
 	@Column(name = "description", length = 500, nullable = false)
 	private String description;
 	
-	@Column(name = "prix", nullable = false)
+	@Column(name = "prix",length = 10, precision = 2, nullable = false)
 	private double prix;
 	
-	@Column(name = "remise", length = 2, nullable = false)
+	@Column(name = "remise",length = 10, precision = 2, nullable = false)
 	private double remise;
 	
+	@NotEmpty
 	@Column(name = "stock", nullable = false)
 	private String stock;
 	
-	@Column(name = "isVendable", columnDefinition="tinyint(1) default 1" , nullable = false)
-	private Boolean isVendable;
+	@Column(name = "isVendable", columnDefinition="tinyint(1) default 1")
+	private boolean isVendable;
 	
-	
+	@NotEmpty
 	@Column(name = "photo", nullable = true)
 	private String photo;
 
@@ -66,7 +65,7 @@ public class Article {
 	private List<Commentaire> commentaires;
 	
 	@ManyToOne
-	@JoinColumn(name = "cate_id", nullable = false)
+	@JoinColumn(name = "category_id", nullable = false)
 	private Categorie categorie;
 	
 	public Article() {

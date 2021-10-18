@@ -8,90 +8,58 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.doranco.eboutique.entity.Article;
-import fr.doranco.eboutique.entity.Categorie;
-import fr.doranco.eboutique.entity.Commentaire;
-import fr.doranco.eboutique.model.connector.DataSourceConnexion;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import fr.doranco.eboutique.entity.Adresse;
+import fr.doranco.eboutique.entity.CartePaiement;
+import fr.doranco.eboutique.entity.User;
+import fr.doranco.eboutique.model.connection.HibernateConnector;
+import fr.doranco.eboutique.utils.Dates;
 
 public class ArticleDao implements IArticleDao {
 
-	private static final DataSourceConnexion MDB = new DataSourceConnexion();
 	private Connection connexion = null;
 	
 	public ArticleDao() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public List<Article> getArticle() throws SQLException {
-		List<Article> listarticle = new ArrayList<>();
-		
-		String request = "SELECT * FROM article";
-		connexion = MDB.getConnection();
-		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			Article article = new Article();
-			article.setId(rs.getInt(1));
-			article.setNom(rs.getString(2));
-			article.setDescription(rs.getString(3));
-			article.setPrix(rs.getDouble(4));
-			article.setRemise(rs.getInt(5));
-			article.setStock(rs.getInt(6));
-			article.setIsVendable(rs.getBoolean(7));
-				// Récupération commentaire
-				int idcomment = rs.getInt(10);
-				List<Commentaire> listcomment = new ArrayList<>();
-				ICommentaireDao commentDao = new CommentaireDao();
-				listcomment = commentDao.getCommentairebyArticle(idcomment);
-				
-			article.setCommentaires(listcomment);
-				// Récupération Categorie
-				int idcate = rs.getInt(11);
-				Categorie cate = new Categorie();
-				ICategorieDao cateDao = new CategorieDao();
-				cate = cateDao.getCategorieById(idcate);
-				
-			article.setCategorie(cate);
-			//article.setCategorie(rs.get);
-			listarticle.add(article);
-		}
-		return listarticle;
+	public Article getArticleById(Integer id) throws Exception {
+		Session session = HibernateConnector.getSession();
+		return session.find(Article.class, id);
 	}
 
 	@Override
-	public Article getArticleById(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void addUtilisateur(Article article) throws Exception {
 
-	@Override
-	public Article addArticle(Article article) throws Exception {
-		String request = "Insert into adresse(nom, description, prix, remise, stock, is_salable, photos, videos, commentaires, categorie)values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		connexion = MDB.getConnection();
-		PreparedStatement ps = connexion.prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
-		Categorie cate = article.getCategorie();
-		ps.setString(1, article.getNom());
-		ps.setString(2, article.getDescription());
-		ps.setDouble(3, article.getPrix());
-		ps.setInt(4, article.getRemise());
-		ps.setInt(5, article.getStock());
-		ps.setBoolean(6, article.getIsVendable());
-		ps.setString(7, article.getPhotos());
-		ps.setString(8, article.getVideos());
-		ps.setInt(9, cate.getId());
-		
-		int nbLigneAjoutees = ps.executeUpdate();
-		if (nbLigneAjoutees == 0) {
-			throw new SQLException("Erreur ! l'employé n'a pas pu être ajouté à la BDD !");
-		} else if (nbLigneAjoutees > 1) {
-			throw new SQLException("Erreur ! Trop de lignes (" + nbLigneAjoutees + ") insérées dans la BDD !");
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = HibernateConnector.getSession();
+			session.save(article);
+			tx = session.beginTransaction();
+			tx.commit();
+			
+		} catch(HibernateException e) {
+			tx.rollback();
+			System.out.println(e);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
-		ResultSet rs = ps.getGeneratedKeys();
-		if (rs.next()) {
-			article.setId(rs.getInt(1));
-		}
-		return article;
+	}
+	
+	public List<Article> getUtilisateursByNom(String nom) throws Exception {
+	
+		Session session = HibernateConnector.getSession();
+		Query<Article> query = session.createQuery("FROM Article u WHERE u.description.nom =: nom", Article.class);
+		query.setParameter("nom", nom);
+		return query.list();
 	}
 
 }

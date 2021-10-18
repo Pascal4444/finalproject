@@ -10,15 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "adresse")
 @NamedQueries({
-@NamedQuery(name ="Address:findAddressesByUserId",
-query = "FROM Address a WHERE a.user.id = :id")
+	@NamedQuery(name ="Address:findByUserId", query = "FROM Adresse a WHERE a.utilisateur.id = :id")
 })
 
 public class Adresse {

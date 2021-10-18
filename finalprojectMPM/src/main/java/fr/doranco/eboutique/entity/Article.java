@@ -1,10 +1,12 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,19 +14,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import fr.doranco.eboutique.entity.Categorie;
-
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "article")
 @NamedQueries({
 	@NamedQuery(name = "Article:findByCategoryId",
 			query = "FROM Article a WHERE a.category.id = :id"),
 	@NamedQuery(name = "Article:findByCategoryName",
-	query = "FROM Article a WHERE a.category.name = :name")
+	query = "FROM Article a WHERE a.category.nom = :nom")
 })
 public class Article {
 	
@@ -41,10 +43,10 @@ public class Article {
 	private String description;
 	
 	@Column(name = "prix", nullable = false)
-	private Float prix;
+	private double prix;
 	
 	@Column(name = "remise", length = 2, nullable = false)
-	private Integer remise;
+	private double remise;
 	
 	@Column(name = "stock", nullable = false)
 	private String stock;
@@ -54,16 +56,20 @@ public class Article {
 	
 	
 	@Column(name = "photo", nullable = true)
-	private byte[] photo;
+	private String photo;
 
 	@Column(name = "video", nullable = true)
-	private byte[] video;
+	private String video;
+	
+	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Commentaire> commentaires;
 	
 	@ManyToOne
-	@JoinColumn(name = "categorie_id", nullable = false)
+	@JoinColumn(name = "categorie", nullable = false)
 	private Categorie categorie;
 	
 	public Article() {
+		commentaires = new ArrayList<Commentaire>();
 	}
 
 	public Integer getId() {
@@ -90,19 +96,19 @@ public class Article {
 		this.description = description;
 	}
 
-	public Float getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
-	public void setPrix(Float prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 
-	public Integer getRemise() {
+	public double getRemise() {
 		return remise;
 	}
 
-	public void setRemise(Integer remise) {
+	public void setRemise(double remise) {
 		this.remise = remise;
 	}
 
@@ -122,28 +128,42 @@ public class Article {
 		this.isVendable = isVendable;
 	}
 	
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 	
-	public byte[] getVideo() {
+	public String getVideo() {
 		return video;
 	}
 
-	public void setVideo(byte[] video) {
+	public void setVideo(String video) {
 		this.video = video;
 	}
-	
+
+	public List<Commentaire> getCommentaires() {
+		return commentaires;
+	}
+
+	public void setCommentaires(List<Commentaire> commentaires) {
+		this.commentaires = commentaires;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", nom=" + nom + ", description=" + description + ", prix="
-				+ prix + ", remise=" + remise + ", stock=" + stock + ", isVendable=" + isVendable + ", photo=" + Arrays.toString(photo)
-				+ ", video=" + Arrays.toString(video) + "]";
+				+ prix + ", remise=" + remise + ", stock=" + stock + ", isVendable=" + isVendable + "]";
 	}
 	
 }

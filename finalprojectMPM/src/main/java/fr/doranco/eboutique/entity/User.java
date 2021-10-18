@@ -21,25 +21,41 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "utilisateur")
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 
 	@NotEmpty
+	@Column(name = "nom")
 	private String nom;
 
 	@NotEmpty
+	@Column(name = "prenom")
 	private String prenom;
 
 	@NotNull
 	@Column(name = "date_naissance")
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
+	
+	@Column(name = "isactif")
 	private Boolean isActif;
+	
+	@NotNull
+	@Column(name = "profil")
 	private String profil;
+	
+	@NotNull
+	@Column(name = "email")
 	private String email;
+	
+	@NotNull
+	@Column(name = "password")
 	private byte[] password;
+	
+	@Column(name = "telephone")
 	private String telephone;
 	
 	
@@ -50,17 +66,18 @@ public class User {
 	private List<CartePaiement> cartesDePaiement;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private List<Commentaire> commentaires;
-
+	private List<Commentaire> listcommentaires;
+	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<ArticlePanier> panier;
 
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Adresse> adresses;
-
-	private String utilisateur;
-
-		
+	
+	// Phrase introduction
+	@Column(name = "commentaires")
+	private String commentaires;
+	
 	public User() {
 	}
 
@@ -144,20 +161,40 @@ public class User {
 		return cartesDePaiement;
 	}
 
-	public List<Commentaire> getCommentaires() {
+	public List<Commentaire> getListcommentaires() {
+		return listcommentaires;
+	}
+
+	public void setListcommentaires(List<Commentaire> listcommentaires) {
+		this.listcommentaires = listcommentaires;
+	}
+
+	public List<Adresse> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(List<Adresse> adresses) {
+		this.adresses = adresses;
+	}
+
+	public String getCommentaires() {
 		return commentaires;
+	}
+
+	public void setCommentaires(String commentaires) {
+		this.commentaires = commentaires;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+
+	public void setCartesDePaiement(List<CartePaiement> cartesDePaiement) {
+		this.cartesDePaiement = cartesDePaiement;
 	}
 
 	public List<ArticlePanier> getPanier() {
 		return panier;
-	}
-	
-	public String getUtilisateur() {
-		return utilisateur;
-	}
-
-	public void setUtilisateur(String utilisateur) {
-		this.utilisateur = utilisateur;
 	}
 	
 

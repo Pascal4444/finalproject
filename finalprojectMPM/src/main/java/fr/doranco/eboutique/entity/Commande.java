@@ -3,22 +3,24 @@ package fr.doranco.eboutique.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "commande")
 public class Commande<ligneDeCommande, lignesCommande> {
@@ -39,38 +41,37 @@ public class Commande<ligneDeCommande, lignesCommande> {
 	@Column(name = "dateLivraison", nullable = false)
 	private Date dateLivraison;
 
+	// réduction en somme
 	@NotNull
 	@Column(name = "totalRemise", nullable = false)
-	private Float totalRemise;
+	private double totalRemise;
 
 	@NotNull
 	@Column(name = "fraisExpedition", nullable = false)
-	private Float fraisExpedition;
+	private double fraisExpedition;
     
 	@NotNull
 	@Column(name = "totalGeneral", nullable = false)
-	private Float totalGeneral;
+	private double totalGeneral;
 	
 	@NotNull
+	@OneToOne
 	@Column(name = "carteDePaiementDefaut", nullable = false)
 	private CartePaiement carteDePaiementDefaut;
 		
 	@OneToOne
-	@JoinColumn(name = "adresse-facturation_id", nullable = false)
+	@JoinColumn(name = "adresse_facturation", nullable = false)
 	private Adresse adresseFacturation;
 	
 	@OneToOne
-	@JoinColumn(name = "adresse-livraison_id", nullable = false)
+	@JoinColumn(name = "adresse_livraison", nullable = false)
 	private Adresse adresseLivraison;
 
-	@OneToOne
-	@JoinColumn(name = "lignesCommande", nullable = false)
+	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ligneDeCommande> lignesCommande;
 	
-//	private List<LignesCommande> lignesCommandeList;
-	
 	@ManyToOne
-	@JoinColumn(name = "utilisateur_id", nullable = false)
+	@JoinColumn(name = "utilisateur", nullable = false)
 	private User utilisateur;
 
 	
@@ -109,27 +110,27 @@ public class Commande<ligneDeCommande, lignesCommande> {
 		this.dateLivraison = dateLivraison;
 	}
 
-	public Float getTotalRemise() {
+	public @NotNull double getTotalRemise() {
 		return totalRemise;
 	}
 
-	public void setTotalRemise(Float totalRemise) {
+	public void setTotalRemise(double totalRemise) {
 		this.totalRemise = totalRemise;
 	}
 
-	public Float getFraisExpedition() {
+	public @NotNull double getFraisExpedition() {
 		return fraisExpedition;
 	}
 
-	public void setFraisExpedition(Float fraisExpedition) {
+	public void setFraisExpedition(double fraisExpedition) {
 		this.fraisExpedition = fraisExpedition;
 	}
 
-	public Float getTotalGeneral() {
+	public @NotNull double getTotalGeneral() {
 		return totalGeneral;
 	}
 
-	public void setTotalGeneral(Float totalGeneral) {
+	public void setTotalGeneral(double totalGeneral) {
 		this.totalGeneral = totalGeneral;
 	}
 		

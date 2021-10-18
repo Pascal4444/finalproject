@@ -26,11 +26,14 @@
 		<property name="isVendable" type="java.lang.Boolean">
 			<column name="is_salable" sql-type="enum('true','false')"></column>
 		</property>
-		<property name="ville" type="java.lang.String">
-			<column name="ville" sql-type="varchar(20)"></column>
+		<property name="photo" type="java.lang.String">
+			<column name="photos" sql-type="varchar(45)"></column>
 		</property>
 		<property name="codePostal" type="java.lang.String">
-			<column name="code_postal" sql-type="varchar(5)"></column>
+			<column name="videos" sql-type="varchar(45)"></column>
+		</property>
+		<property name="stock" type="java.lang.Integer">
+			<column name="categorie" sql-type="int(11)"></column>
 		</property>
 
 	</class>

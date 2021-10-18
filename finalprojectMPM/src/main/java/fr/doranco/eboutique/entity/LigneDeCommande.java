@@ -1,21 +1,16 @@
 package fr.doranco.eboutique.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
+	@SuppressWarnings("deprecation")
 	public class LigneDeCommande {
 		
 	@Id
@@ -28,24 +23,21 @@ import org.hibernate.validator.constraints.NotEmpty;
 	
 	@NotEmpty
 	@Column(name = "prixUnitaire", length = 200, nullable = false)
-	private Float prixUnitaire;
+	private double prixUnitaire;
 	
 	@Column(name = "remiseArticle", nullable = false)
-	private Float remiseArticle;
+	private double remiseArticle;
 
-	@NotEmpty
-	@Column(name = "commande", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "commande", nullable = false)
 	private Commande commande;
 	
-	@Column(name = "article", nullable = false)
-	private List<Article> article;
-	
-	@OneToMany(mappedBy = "ligneDeCommande", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Article> articles;
+	@OneToOne
+	@JoinColumn(name = "article", nullable = false)
+	private Article article;
 
 
 	public LigneDeCommande() {
-		this.articles = new ArrayList<Article>();
 	}
 
 	public Integer getId() {
@@ -64,24 +56,20 @@ import org.hibernate.validator.constraints.NotEmpty;
 		this.quantite = quantite;
 	}
 
-	public Float getPrixUnitaire() {
+	public double getPrixUnitaire() {
 		return prixUnitaire;
 	}
 
-	public void setPrixUnitaire(Float prixUnitaire) {
+	public void setPrixUnitaire(double prixUnitaire) {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	public Float getRemiseArticle() {
+	public double getRemiseArticle() {
 		return remiseArticle;
 	}
 
-	public void setRemiseArticle(Float remiseArticle) {
+	public void setRemiseArticle(double remiseArticle) {
 		this.remiseArticle = remiseArticle;
-	}
-	
-	public List<Article> getArticles() {
-		return articles;
 	}
 	
 	public Commande getCommande() {
@@ -91,12 +79,21 @@ import org.hibernate.validator.constraints.NotEmpty;
 	public void setCommande(Commande commande) {
 		this.commande = commande;
 	}
-		
 	
+	public Article getArticle() {
+		return article;
+	}
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
+
 	@Override
 	public String toString() {
 		return "LigneDeCommande [id=" + id + ", quantite=" + quantite + ", prixUnitaire=" + prixUnitaire
-				+ ", remiseArticle=" + remiseArticle + ", commande=" + commande + "]";
+				+ ", remiseArticle=" + remiseArticle + ", commande=" + commande + ", article=" + article + "]";
 	}
+
+	
   
 }

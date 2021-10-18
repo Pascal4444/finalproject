@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "categorie")
 public class Categorie {
@@ -27,20 +28,21 @@ public class Categorie {
 	@Column(name = "nom", length = 30, nullable = false)
 	private String nom;
 	
+	// remise en %
 	@NotEmpty
 	@Column(name = "remise", length = 10, nullable = false)
-	private String remise;
+	private int remise;
 	
 	@NotEmpty
 	@Column(name = "remiseCumulable", length = 10, nullable = false)
-	private String remiseCumulable;
+	private Boolean remiseCumulable;
 	
 	@NotEmpty
 	@Column(name = "description", length = 200, nullable = false)
 	private String description;
 	
 	@Column(name = "photo", nullable = true)
-	private byte[] photo;
+	private String photo;
 
 	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Article> articles;
@@ -73,32 +75,40 @@ public class Categorie {
 		this.description = description;
 	}
 
-	public String getRemise() {
+	public int getRemise() {
 		return remise;
 	}
 
-	public void setRemise(String remise) {
+	public void setRemise(int remise) {
 		this.remise = remise;
 	}
 
-	public String getRemiseCumulable() {
+	public Boolean getRemiseCumulable() {
 		return remiseCumulable;
 	}
 
-	public void setRemiseCumulable(String remiseCumulable) {
+	public void setRemiseCumulable( Boolean remiseCumulable) {
 		this.remiseCumulable = remiseCumulable;
 	}
 
-	public byte[] getPhoto() {
+	public String getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
 	public List<Article> getArticles() {
 		return articles;
 	}
+
+	@Override
+	public String toString() {
+		return "Categorie [id=" + id + ", nom=" + nom + ", remise=" + remise + ", remiseCumulable=" + remiseCumulable
+				+ ", description=" + description + ", articles=" + articles + "]";
+	}
+	
+	
 	
 }

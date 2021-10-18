@@ -20,9 +20,10 @@
 		<property name="codePostal" type="java.lang.String">
 			<column name="codePostal" sql-type="varchar(5)"></column>
 		</property>
-		<!-- <property name="user" type="java.lang.User">
-			<column name="user_id" sql-type="int(11)"></column>
-		</property> -->
+		<many-to-one name="user_id" class="fr.doranco.entity.User"
+					foreign-key="adresses_default" >
+		</many-to-one>
+		
 	</class>
 
 </hibernate-mapping>

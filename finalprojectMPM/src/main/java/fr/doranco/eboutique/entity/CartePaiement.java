@@ -16,6 +16,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "cartePaiement")
 public class CartePaiement {
@@ -24,10 +25,6 @@ public class CartePaiement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
-	@NotEmpty
-	@Column(name = "numero", length = 11, nullable = false)
-	private String numero;
 	
 	/**
 	 * C'est le Titulaire de la carte de paiement
@@ -41,22 +38,27 @@ public class CartePaiement {
 	private String prenomProprietaire;
 	
 	@NotEmpty
+	@Column(name = "numero", length = 11, nullable = false)
+	private Byte[] numero;
+	
+	@NotEmpty
 	@Column(name = "dateFinValidite", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateFinValidite;
 	
 	@NotEmpty
 	@Column(name = "cryptogramme", length = 10, nullable = false)
-	private String cryptogramme;
+	private Byte[] cryptogramme;
 	
 	@ManyToOne
-	@JoinColumn(name = "cartePaiement_id", nullable = false)
+	@JoinColumn(name = "utilisateur", nullable = false)
 	private User utilisateur;
 
 	public CartePaiement() {
 	}
-	public CartePaiement(Integer id, String nomProprietaire, String prenomProprietaire, String numero,
-			Date dateFinValidite, String cryptogramme, User utilisateur) {
+	
+	public CartePaiement(Integer id, String nomProprietaire, String prenomProprietaire, @NotEmpty Byte[] numero,
+			Date dateFinValidite, @NotEmpty Byte[] cryptogramme, User utilisateur) {
 		this.id = id;
 		this.nomProprietaire = nomProprietaire;
 		this.prenomProprietaire = prenomProprietaire;
@@ -74,11 +76,11 @@ public class CartePaiement {
 		this.id = id;
 	}
 
-	public String getNumero() {
+	public @NotEmpty Byte[] getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(@NotEmpty Byte[] numero) {
 		this.numero = numero;
 	}
 
@@ -106,11 +108,11 @@ public class CartePaiement {
 		this.dateFinValidite= dateFinValidite;
 	}
 
-	public String getCryptogramme() {
+	public @NotEmpty Byte[] getCryptogramme() {
 		return cryptogramme;
 	}
 
-	public void setCryptogramme(String cryptogramme) {
+	public void setCryptogramme(@NotEmpty Byte[] cryptogramme) {
 		this.cryptogramme = cryptogramme;
 	}
 

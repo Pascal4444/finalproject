@@ -3,22 +3,25 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="fr.doranco.eboutique.entity.Adresse" table="adresse">
+	<class name="fr.doranco.eboutique.entity.LigneDeCommande" table="ligne_de_commande">
 		<id name="id" type="java.lang.Integer">
 			<column name="id" sql-type="int(11)"></column>
 			<generator class="increment"></generator>
 		</id>
 		<property name="numero" type="java.lang.Integer">
-			<column name="numero" sql-type="int(4)"></column>
+			<column name="quantite" sql-type="int(2)"></column>
 		</property>
 		<property name="rue" type="java.lang.String">
-			<column name="rue" sql-type="varchar(45)"></column>
+			<column name="prix_unitaire" sql-type="DOUBLE"></column>
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="remise_article" sql-type="DOUBLE"></column>
 		</property>
 		<property name="ville" type="java.lang.String">
-			<column name="ville" sql-type="varchar(20)"></column>
+			<column name="commande" sql-type="varchar(45)"></column>
 		</property>
 		<property name="codePostal" type="java.lang.String">
-			<column name="code_postal" sql-type="varchar(5)"></column>
+			<column name="article" sql-type="varchar(45)"></column>
 		</property>
 
 	</class>

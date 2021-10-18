@@ -8,7 +8,7 @@
 		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 		
 		<!-- executer la commande suivante en root et créer la base ecommerce avant de lancer -->
-		<!-- grant ALL privileges on ecommerce.* TO 'projetdb'@'localhost' IDENTIFIED BY '1234'; -->
+		<!-- grant ALL privileges on ecommerce_db.* TO 'projetdb'@'localhost' IDENTIFIED BY '1234'; -->
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ecommerce_db</property>
 		
 		<property name="hibernate.connection.username">projetdb</property>

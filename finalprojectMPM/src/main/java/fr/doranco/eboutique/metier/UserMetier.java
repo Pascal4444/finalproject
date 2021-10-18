@@ -24,7 +24,8 @@ public class UserMetier implements IUserMetier {
 		user.setNom(user.getNom().trim().toUpperCase());
 		user.setPrenom(user.getPrenom().trim().toLowerCase());
 		
-		return userDao.addUser(user);
+		//return userDao.addUser(user);
+		return null;
 	}
 
 }

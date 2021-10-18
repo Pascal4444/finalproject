@@ -68,7 +68,7 @@ public class User {
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private List<Commentaire> listcommentaires;
 	
-	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<ArticlePanier> panier;
 
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)

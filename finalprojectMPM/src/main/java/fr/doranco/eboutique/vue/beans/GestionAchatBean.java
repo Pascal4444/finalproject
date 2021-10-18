@@ -8,9 +8,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.eboutique.pojo.Utilisateur;
-import fr.doranco.eboutique.metier.IUtilisateurMetier;
-import fr.doranco.eboutique.metier.UtilisateurMetier;
+import fr.doranco.eboutique.metier.IUserMetier;
+import fr.doranco.eboutique.metier.UserMetier;
 
 @ManagedBean(name = "userBean")
 @SessionScoped
@@ -23,7 +22,7 @@ public class GestionAchatBean {
 	private String password;
 	private String profil;
 	
-	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
+	private final IUserMetier utilisateurMetier = new UserMetier();
 	private Utilisateur connectedUtilisateur;
 	private String errorMessage;
 	

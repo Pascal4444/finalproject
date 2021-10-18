@@ -13,14 +13,13 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.hbm2ddl.auto">create</property> <!-- none/validate/create/create-drop/update -->
 
-		<mapping resource="fr/doranco/hbm/adresse.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/article.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/cartepaiement.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/categorie.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/commande.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/commentaire.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/lignedecommande.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/params.hbm.xml"></mapping>
-		<mapping resource="fr/doranco/hbm/utilisateur.hbm.xml"></mapping>
+		<mapping class="fr.doranco.eboutique.entity.Adresse"></mapping>
+		<mapping class="fr.doranco.eboutique.entity.User"></mapping>
+		<mapping class="fr.doranco.eboutique.entity."></mapping>
+		<mapping class="fr.doranco.eboutique.entity"></mapping>
+		<mapping class="fr.doranco.eboutique.entity"></mapping>
+		<mapping class="fr.doranco.eboutique.entity"></mapping>
+		<mapping class="fr.doranco.eboutique.entity"></mapping>
+		<mapping class="fr.doranco.eboutique.entity"></mapping>
 	</session-factory>
 </hibernate-configuration>

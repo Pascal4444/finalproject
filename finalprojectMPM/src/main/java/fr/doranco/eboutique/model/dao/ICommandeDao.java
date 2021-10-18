@@ -9,5 +9,9 @@ public interface ICommandeDao {
 
 	List<Commande> getCommande() throws SQLException;
 	Commande getCommandeById(Integer id) throws SQLException;
-	Commande addCommande(Commande commande) throws Exception;
+	Commande getCommandeByUtilisateur(Integer idUtilisateure) throws Exception;
+	Commande addCommande(Commande commande, Integer idUtilisateur) throws Exception;
+	void updateCommande(Commande commande) throws Exception;
+	void removeCommande(Integer id) throws Exception;
+		
 }

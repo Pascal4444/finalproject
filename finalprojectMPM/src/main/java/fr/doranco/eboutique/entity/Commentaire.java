@@ -29,11 +29,11 @@ public class Commentaire {
 	private Integer note;
 	
 	@ManyToOne
-	@JoinColumn(name = "article", nullable = false)
+	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 
 	@ManyToOne
-	@JoinColumn(name = "utilisateur", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User utilisateur;
 
 

@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "commande")
-public class Commande<ligneDeCommande, lignesCommande> {
+public class Commande {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,10 +66,10 @@ public class Commande<ligneDeCommande, lignesCommande> {
 	private Adresse adresseLivraison;
 
 	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<ligneDeCommande> lignesCommande;
+	private List<LigneDeCommande> lignesCommande;
 	
 	@ManyToOne
-	@JoinColumn(name = "utilisateur", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User utilisateur;
 
 	
@@ -164,11 +164,11 @@ public class Commande<ligneDeCommande, lignesCommande> {
 		this.utilisateur = utilisateur;
 	}
 	
-	public List<ligneDeCommande> getLignesCommande() {
+	public List<LigneDeCommande> getLignesCommande() {
 		return lignesCommande;
 	}
 
-	public void setLignesCommande(List<ligneDeCommande> lignesCommande) {
+	public void setLignesCommande(List<LigneDeCommande> lignesCommande) {
 		this.lignesCommande = lignesCommande;
 	}
 

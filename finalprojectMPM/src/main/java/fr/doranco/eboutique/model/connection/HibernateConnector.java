@@ -6,13 +6,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-public final class HibernateDataSource {
+public final class HibernateConnector {
 
-	private static HibernateDataSource instance;
-	private SessionFactory sessionFactory;
-	private Session session;
+	private static HibernateConnector instance;
+	private static SessionFactory sessionFactory;
+	private static Session session;
 	
-	private HibernateDataSource() {
+	private HibernateConnector() {
 		
 		//Hibernate 3 et 4
 //		Configuration config = new Configuration().configure();
@@ -25,13 +25,15 @@ public final class HibernateDataSource {
 		sessionFactory = new Configuration().configure().buildSessionFactory();
 	}
 	
-	public static HibernateDataSource getSession() {
+	public static Session getSession() {
 		
 		if (instance == null) {
-			instance = new HibernateDataSource();
+			instance = new HibernateConnector();
 		}
-		
-		return instance;
+		if (session == null || session.isOpen()) {
+			session = sessionFactory.openSession();
+		}
+		return session;
 	}
 	
 }

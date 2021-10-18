@@ -16,10 +16,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.ColumnDefault;
 
-@SuppressWarnings("deprecation")
+
 @Entity
 @Table(name = "article")
 @NamedQueries({
@@ -51,7 +52,7 @@ public class Article {
 	@Column(name = "stock", nullable = false)
 	private String stock;
 	
-	@Column(name = "isVendable", nullable = false)
+	@Column(name = "isVendable", columnDefinition="tinyint(1) default 1" , nullable = false)
 	private Boolean isVendable;
 	
 	
@@ -61,11 +62,11 @@ public class Article {
 	@Column(name = "video", nullable = true)
 	private String video;
 	
-	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "article", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Commentaire> commentaires;
 	
 	@ManyToOne
-	@JoinColumn(name = "categorie", nullable = false)
+	@JoinColumn(name = "cate_id", nullable = false)
 	private Categorie categorie;
 	
 	public Article() {

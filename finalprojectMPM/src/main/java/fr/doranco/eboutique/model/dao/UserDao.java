@@ -17,21 +17,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public User getUserById(Integer id) throws Exception{
-		Session session = HibernateConnector.getSession();
-		return session.find(User.class, id);
-	}
-
-	public List<User> getUserByVille(String ville) throws Exception {
-		
-		Session session = HibernateConnector.getSession();
-		Query<User> query = session.createQuery("FROM User u WHERE u.adresses.ville =: ville", User.class);
-		query.setParameter("ville", ville);
-		return query.list();
-	}
-
-	@Override
-	public void addUser (User user) throws Exception {
+	public void addUser(User user) throws Exception {
 
 		Session session = null;
 		Transaction tx = null;
@@ -49,24 +35,86 @@ public class UserDao implements IUserDao {
 				session.close();
 			}
 		}
+		
+	}
+
+	@Override
+	public void updateUser(User user) throws Exception {
+
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = HibernateConnector.getSession();
+			session.update(user);
+			tx = session.beginTransaction();
+			tx.commit();
+			
+		} catch(HibernateException e) {
+			tx.rollback();
+			System.out.println(e);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		
+	}
+
+	@Override
+	public void deleteUser(Integer id) throws Exception {
+
+		Session session = null;
+		Transaction tx = null;
+		try {
+			session = HibernateConnector.getSession();
+			session.delete(id);
+			tx = session.beginTransaction();
+			tx.commit();
+			
+		} catch(HibernateException e) {
+			tx.rollback();
+			System.out.println(e);
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		
+	}
+
+	@Override
+	public User getUserById(Integer id) throws Exception{
+		Session session = HibernateConnector.getSession();
+		return session.find(User.class, id);
 	}
 
 	@Override
 	public User getUserByEmail(String email) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateConnector.getSession();
+		Query<User> query = session.createQuery("FROM User u WHERE u.email =: email", User.class);
+		query.setParameter("email", email);
+		return query.getSingleResult();
 	}
 
 	@Override
-	public void updateUser(User utilisateur) throws Exception {
-		// TODO Auto-generated method stub
+	public List<User> getUserByVille(String ville) throws Exception {
 		
+		Session session = HibernateConnector.getSession();
+		Query<User> query = session.createQuery("FROM User u WHERE u.adresses.ville =: ville", User.class);
+		query.setParameter("ville", ville);
+		return query.list();
 	}
-
-	@Override
-	public void removeUser(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
+
+
+/* Exemple
+	public List<User> getUserByVille(String ville) throws Exception {
+		
+		Session session = HibernateConnector.getSession();
+		Query<User> query = session.createQuery("FROM User u WHERE u.adresses.ville =: ville", User.class);
+		query.setParameter("ville", ville);
+		return query.list();
+	}
+*/

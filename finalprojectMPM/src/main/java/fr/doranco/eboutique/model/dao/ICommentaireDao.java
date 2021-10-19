@@ -5,8 +5,8 @@ import fr.doranco.eboutique.entity.User;
 
 public interface ICommentaireDao {
 
-	void addCommentaire(Commentaire commentaire) throws Exception;
-	void updateCommentaire(Commentaire commentaire) throws Exception;
+	void addCommentaire(Commentaire comment) throws Exception;
+	void updateCommentaire(Commentaire comment) throws Exception;
 	void deleteCommentaire(Integer id) throws Exception;
 	Commentaire getCommentaireById(Integer id) throws Exception;
 	// @OneToMany _ @OneToOne _ @ManyToOne

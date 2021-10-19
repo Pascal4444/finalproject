@@ -6,7 +6,7 @@ import fr.doranco.eboutique.entity.User;
 
 public interface IArticlePanierDao {
 
-	void addArticlePannier(ArticlePanier articlepanier) throws Exception;
+	void addArticlePanier(ArticlePanier articlepanier) throws Exception;
 	void updateArticlePanier(ArticlePanier articlepanier) throws Exception;
 	void deleteArticlePanier(Integer id) throws Exception;
 	ArticlePanier getArticlePanierById(Integer id) throws Exception;

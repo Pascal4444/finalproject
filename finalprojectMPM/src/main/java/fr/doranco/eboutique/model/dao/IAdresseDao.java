@@ -1,16 +1,14 @@
 package fr.doranco.eboutique.model.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import fr.doranco.eboutique.entity.Adresse;
+import fr.doranco.eboutique.entity.User;
 
 public interface IAdresseDao {
 
-	List<Adresse> getAdresse() throws SQLException;
-	Adresse getAdresseById(Integer id) throws SQLException;
-	Adresse addAdresse(Adresse adresse) throws Exception;
-	Adresse getAdresseByUtilisateur(Integer idUtilisateur) throws Exception;
+	void addAdresse(Adresse adresse) throws Exception;
 	void updateAdresse(Adresse adresse) throws Exception;
-	void removeAdresse(Integer id) throws Exception;
+	void deleteAdresse(Integer id) throws Exception;
+	Adresse getAdresseById(Integer id) throws Exception;
+	// @OneToMany _ @OneToOne _ @ManyToOne
+	User getUserByAdresse(Integer user_id) throws Exception;
 }

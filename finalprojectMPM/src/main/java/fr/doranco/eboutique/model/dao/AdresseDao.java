@@ -28,19 +28,27 @@ public class AdresseDao implements IAdresseDao {
 	}
 
 	@Override
-	public Adresse getAdresseById(Integer id) throws Exception {
+	public Adresse getAdresseByIdss(Integer id) throws Exception {
 		Session session = HibernateConnector.getSession();
 		return session.find(Adresse.class, id);
 	}
+	
+	public List<Adresse> getUtilisateursByVilless(String ville) throws Exception {
+	
+		Session session = HibernateConnector.getSession();
+		Query<Adresse> query = session.createQuery("FROM Adresse u WHERE u.adresses.ville =: ville", Adresse.class);
+		query.setParameter("ville", ville);
+		return query.list();
+	}
 
 	@Override
-	public void addUtilisateur(Adresse adresse) throws Exception {
-
+	public void addAdresse(Adresse adresse) throws Exception {
+		
 		Session session = null;
 		Transaction tx = null;
 		try {
 			session = HibernateConnector.getSession();
-			session.save(Adresse);
+			session.save(adresse);
 			tx = session.beginTransaction();
 			tx.commit();
 			
@@ -52,14 +60,31 @@ public class AdresseDao implements IAdresseDao {
 				session.close();
 			}
 		}
+		
 	}
-	
-	public List<Adresse> getUtilisateursByVille(String ville) throws Exception {
-	
-		Session session = HibernateConnector.getSession();
-		Query<Adresse> query = session.createQuery("FROM Adresse u WHERE u.adresses.ville =: ville", Adresse.class);
-		query.setParameter("ville", ville);
-		return query.list();
+
+	@Override
+	public void updateAdresse(Adresse adresse) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeAdresse(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Adresse getAdresseById(Integer id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Adresse getAdresseByUtilisateur(Integer idUtilisateur) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

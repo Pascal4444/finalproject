@@ -1,13 +1,14 @@
 package fr.doranco.eboutique.model.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import fr.doranco.eboutique.entity.CartePaiement;
+import fr.doranco.eboutique.entity.User;
 
 public interface ICartePaiementDao {
 
-	List<CartePaiement> getCartePaiement() throws SQLException;
-	CartePaiement getCartePaiementById(Integer id) throws SQLException;
-	CartePaiement addCartePaiement(CartePaiement cartePaiement) throws Exception;
+	void addCartePaiement(CartePaiement cp) throws Exception;
+	void updateCartePaiement(CartePaiement cp) throws Exception;
+	void deleteCartePaiement(Integer id) throws Exception;
+	CartePaiement getCartePaiementById(Integer id) throws Exception;
+	// @OneToMany _ @OneToOne _ @ManyToOne
+	User getUserByCartePaiement(Integer user_id) throws Exception;
 }

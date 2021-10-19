@@ -11,11 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-//import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
+//import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-//import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,15 +31,15 @@ public class User {
 	private Integer id;
 
 	@NotEmpty
-	@Column(name = "nom")
+	@Column(name = "nom", nullable = false)
 	private String nom;
 
 	@NotEmpty
-	@Column(name = "prenom")
+	@Column(name = "prenom", nullable = false)
 	private String prenom;
 
 	@NotNull
-	@Column(name = "date_naissance")
+	@Column(name = "date_naissance", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 	
@@ -49,11 +47,11 @@ public class User {
 	private boolean isActif;
 	
 	@NotEmpty
-	@Column(name = "profil")
+	@Column(name = "profil", nullable = false)
 	private String profil;
 	
 	@NotEmpty
-	@Column(name = "email")
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
 	@NotNull

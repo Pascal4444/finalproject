@@ -7,10 +7,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
-import fr.doranco.eboutique.pojo.Utilisateur;
-import fr.doranco.eboutique.metier.IUtilisateurMetier;
-import fr.doranco.eboutique.metier.UtilisateurMetier;
+import fr.doranco.eboutique.entity.Adresse;
+import fr.doranco.eboutique.entity.CartePaiement;
+import fr.doranco.eboutique.entity.User;
+import fr.doranco.eboutique.metier.IUserMetier;
+import fr.doranco.eboutique.metier.UserMetier;
 
 @ManagedBean(name = "utilisateurBean")
 @SessionScoped
@@ -18,13 +19,19 @@ public class UtilisateurBean {
 
 	private String nom;
 	private String prenom;
-	private String dateNaissance;
+	private Date dateNaissance;
 	private String email;
-	private String password;
+	private byte[] password;
 	private String profil;
+	private boolean isActif;
+	private String telephone;
+	private String commentaire;
+	private CartePaiement carteDePaiementDefault;
+	private Adresse adresseFacturationDefault;
+	private Adresse adresseLivraisonDefault;
 	
-	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
-	private Utilisateur connectedUtilisateur;
+	private final IUserMetier utilisateurMetier = new UserMetier();
+	private User connectedUtilisateur;
 	private String errorMessage;
 	
 	public UtilisateurBean() {
@@ -32,11 +39,11 @@ public class UtilisateurBean {
 
 	public String addUser() {
 		
-		Utilisateur utilisateur = new Utilisateur();
+		User utilisateur = new User();
 		//
 		
 		try {
-			connectedUtilisateur = (Utilisateur) utilisateurMetier.addUtilisateur(utilisateur);
+			connectedUtilisateur = (User) utilisateurMetier.addUser(utilisateur);
 			return "login.xhtml";
 		} catch (Exception e) {
 			this.errorMessage = "Erreur technique, veuillez réessayer plus tard\n"
@@ -66,11 +73,11 @@ public class UtilisateurBean {
 		this.prenom = prenom;
 	}
 
-	public String getDateNaissance() {
+	public Date getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(String dateNaissance) {
+	public void setDateNaissance(Date dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
@@ -82,11 +89,11 @@ public class UtilisateurBean {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public byte[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(byte[] password) {
 		this.password = password;
 	}
 
@@ -98,11 +105,63 @@ public class UtilisateurBean {
 		this.profil = profil;
 	}
 
-	public Utilisateur getConnectedUtilisateur() {
+	public boolean isActif() {
+		return isActif;
+	}
+
+	public void setActif(boolean isActif) {
+		this.isActif = isActif;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+	public CartePaiement getCarteDePaiementDefault() {
+		return carteDePaiementDefault;
+	}
+
+	public void setCarteDePaiementDefault(CartePaiement carteDePaiementDefault) {
+		this.carteDePaiementDefault = carteDePaiementDefault;
+	}
+
+	public Adresse getAdresseFacturationDefault() {
+		return adresseFacturationDefault;
+	}
+
+	public void setAdresseFacturationDefault(Adresse adresseFacturationDefault) {
+		this.adresseFacturationDefault = adresseFacturationDefault;
+	}
+
+	public Adresse getAdresseLivraisonDefault() {
+		return adresseLivraisonDefault;
+	}
+
+	public void setAdresseLivraisonDefault(Adresse adresseLivraisonDefault) {
+		this.adresseLivraisonDefault = adresseLivraisonDefault;
+	}
+
+	public IUserMetier getUtilisateurMetier() {
+		return utilisateurMetier;
+	}
+
+	public User getConnectedUtilisateur() {
 		return connectedUtilisateur;
 	}
 
-	public void setConnectedUtilisateur(Utilisateur connectedUtilisateur) {
+	public void setConnectedUtilisateur(User connectedUtilisateur) {
 		this.connectedUtilisateur = connectedUtilisateur;
 	}
 

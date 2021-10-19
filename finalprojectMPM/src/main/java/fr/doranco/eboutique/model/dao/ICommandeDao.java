@@ -9,7 +9,6 @@ import fr.doranco.eboutique.entity.LigneDeCommande;
 import fr.doranco.eboutique.entity.User;
 
 public interface ICommandeDao {
-
 	void addCommande(Commande commande) throws Exception;
 	void updateCommande(Commande commande) throws Exception;
 	void deleteCommande(Integer id) throws Exception;
@@ -20,5 +19,4 @@ public interface ICommandeDao {
 	Adresse getAdresseLivraisonByCommande(Integer adresse_livraison) throws Exception;
 	User getUserByCommande(Integer user_id) throws Exception;
 	List<LigneDeCommande> getLigneDeCommandeByCommande(Integer id) throws Exception;
-	
 }

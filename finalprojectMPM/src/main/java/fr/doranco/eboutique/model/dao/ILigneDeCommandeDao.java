@@ -1,18 +1,16 @@
 package fr.doranco.eboutique.model.dao;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import fr.doranco.eboutique.entity.Adresse;
 import fr.doranco.eboutique.entity.Article;
-import fr.doranco.eboutique.entity.ArticlePanier;
+import fr.doranco.eboutique.entity.Commande;
 import fr.doranco.eboutique.entity.LigneDeCommande;
 
 public interface ILigneDeCommandeDao {
 
-	void addArticlePannier(ArticlePanier articlepanier) throws Exception;
-	void updateArticlePanier(ArticlePanier articlepanier) throws Exception;
-	void deleteArticlePanier(Integer id) throws Exception;
-	Article getArticleById(Integer id) throws Exception;
+	void addLigneDeCommande(LigneDeCommande ldc) throws Exception;
+	void updateLigneDeCommande(LigneDeCommande ldc) throws Exception;
+	void deleteLigneDeCommande(Integer id) throws Exception;
+	LigneDeCommande getLigneDeCommandeById(Integer id) throws Exception;
 	// @OneToMany _ @OneToOne _ @ManyToOne
+	Commande getCommandeByLigneDeCommande(Integer commande_id) throws Exception;
+	Article getArticleByLigneDeCommande(Integer article_id) throws Exception;
 }

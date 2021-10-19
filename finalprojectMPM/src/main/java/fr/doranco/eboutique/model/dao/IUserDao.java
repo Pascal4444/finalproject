@@ -7,7 +7,7 @@ import fr.doranco.eboutique.entity.User;
 
 public interface IUserDao {
 
-	void addUser(User user) throws Exception;
+	User addUser(User user) throws Exception;
 	void updateUser(User user) throws Exception;
 	void deleteUser(Integer id) throws Exception;
 	User getUserById(Integer id) throws Exception;

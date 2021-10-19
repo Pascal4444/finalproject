@@ -47,7 +47,7 @@ public class User {
 	private boolean isActif;
 	
 	@NotEmpty
-	@Column(name = "profil", nullable = false)
+	@Column(name = "profil", nullable = true)
 	private String profil;
 	
 	@NotEmpty
@@ -66,15 +66,15 @@ public class User {
 	private List<Commande> commandes;
 
 	@OneToOne
-	@JoinColumn(name = "carte_paiement_default", nullable = false)
+	@JoinColumn(name = "carte_paiement_default")
 	private CartePaiement carteDePaiementDefault;
 	
 	@OneToOne
-	@JoinColumn(name = "adresse_facturation_default", nullable = false)
+	@JoinColumn(name = "adresse_facturation_default")
 	private Adresse adresseFacturationDefault;
 	
 	@OneToOne
-	@JoinColumn(name = "adresse_livraison_default", nullable = false)
+	@JoinColumn(name = "adresse_livraison_default")
 	private Adresse adresseLivraisonDefault;
 	
 	@OneToMany(mappedBy = "utilisateur", cascade=CascadeType.ALL, fetch=FetchType.LAZY)

@@ -3,9 +3,9 @@ package fr.doranco.eboutique.vue.beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import fr.doranco.eboutique.pojo.Utilisateur;
-import fr.doranco.eboutique.metier.IUtilisateurMetier;
-import fr.doranco.eboutique.metier.UtilisateurMetier;
+import fr.doranco.eboutique.entity.User;
+import fr.doranco.eboutique.metier.IUserMetier;
+import fr.doranco.eboutique.metier.UserMetier;
 
 @ManagedBean(name = "loginBean")
 public class LoginBean {
@@ -14,12 +14,12 @@ public class LoginBean {
 	private String email;
 
 	@ManagedProperty(name = "password", value = "")
-	private String password;
+	private byte[] password;
 
 	@ManagedProperty(name = "errorMessage", value = "")
 	private String errorMessage;
 
-	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
+	private final IUserMetier utilisateurMetier = new UserMetier();
 	
 	public LoginBean() {
 	}
@@ -27,7 +27,7 @@ public class LoginBean {
 	public String seConnecter() {
 		
 		try {
-			Utilisateur utilisateur = (Utilisateur) utilisateurMetier.seConnecter(email, password);
+			User utilisateur = (User) utilisateurMetier.seConnecter(email, password);
 			if (utilisateur == null) {
 				this.errorMessage = "Email et/ou Mot de passe incorrects ! Veuillez réessayer.";
 				return "";
@@ -48,11 +48,11 @@ public class LoginBean {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public byte[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(byte[] password) {
 		this.password = password;
 	}
 

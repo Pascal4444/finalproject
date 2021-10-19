@@ -17,7 +17,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public void addUser(User user) throws Exception {
+	public User addUser(User user) throws Exception {
 
 		Session session = null;
 		Transaction tx = null;
@@ -35,7 +35,7 @@ public class UserDao implements IUserDao {
 				session.close();
 			}
 		}
-		
+		return user;
 	}
 
 	@Override

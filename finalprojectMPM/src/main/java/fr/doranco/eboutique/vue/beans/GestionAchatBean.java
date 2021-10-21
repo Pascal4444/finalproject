@@ -2,12 +2,12 @@ package fr.doranco.eboutique.vue.beans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import fr.doranco.eboutique.entity.User;
 import fr.doranco.eboutique.metier.IUserMetier;
 import fr.doranco.eboutique.metier.UserMetier;
 
@@ -23,7 +23,7 @@ public class GestionAchatBean {
 	private String profil;
 	
 	private final IUserMetier utilisateurMetier = new UserMetier();
-	private Utilisateur connectedUtilisateur;
+	private User connectedUtilisateur;
 	private String errorMessage;
 	
 	public GestionAchatBean() {
@@ -31,11 +31,11 @@ public class GestionAchatBean {
 
 	public String addUtilisateur() {
 		
-		Utilisateur utilisateur = new Utilisateur();
+		User utilisateur = new User();
 		//
 		
 		try {
-			connectedUtilisateur = (Utilisateur) utilisateurMetier.addUtilisateur(utilisateur);
+			connectedUtilisateur = (User) utilisateurMetier.addUser(utilisateur);
 			return "login.xhtml";
 		} catch (Exception e) {
 			this.errorMessage = "Erreur technique, veuillez réessayer plus tard\n"
@@ -99,11 +99,11 @@ public class GestionAchatBean {
 		this.profil = profil;
 	}
 
-	public Utilisateur getConnectedUser() {
+	public User getConnectedUser() {
 		return connectedUtilisateur;
 	}
 
-	public void setConnectedUtilisateur(Utilisateur connectedUtilisateur) {
+	public void setConnectedUtilisateur(User connectedUtilisateur) {
 		this.connectedUtilisateur = connectedUtilisateur;
 	}
 

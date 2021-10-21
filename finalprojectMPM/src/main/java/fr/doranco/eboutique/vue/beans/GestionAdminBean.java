@@ -2,15 +2,14 @@ package fr.doranco.eboutique.vue.beans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-import fr.doranco.eboutique.pojo.Utilisateur;
-import fr.doranco.eboutique.metier.IUtilisateurMetier;
-import fr.doranco.eboutique.metier.UtilisateurMetier;
+import fr.doranco.eboutique.entity.User;
+import fr.doranco.eboutique.metier.IUserMetier;
+import fr.doranco.eboutique.metier.UserMetier;
 
 @ManagedBean(name = "utilisateurBean")
 @SessionScoped
@@ -23,8 +22,8 @@ public class GestionAdminBean {
 	private String password;
 	private String profil;
 	
-	private final IUtilisateurMetier utilisateurMetier = new UtilisateurMetier();
-	private Utilisateur connectedUtilisateur;
+	private final IUserMetier utilisateurMetier = new UserMetier();
+	private User connectedUtilisateur;
 	private String errorMessage;
 	
 	public GestionAdminBean() {
@@ -32,11 +31,11 @@ public class GestionAdminBean {
 
 	public String addUtilisateur() {
 		
-		Utilisateur utilisateur = new Utilisateur();
+		User utilisateur = new User();
 		//
 		
 		try {
-			connectedUtilisateur = (Utilisateur) utilisateurMetier.addUtilisateur(utilisateur);
+			connectedUtilisateur = (User) utilisateurMetier.addUser(utilisateur);
 			return "login.xhtml";
 		} catch (Exception e) {
 			this.errorMessage = "Erreur technique, veuillez réessayer plus tard\n"
@@ -98,11 +97,11 @@ public class GestionAdminBean {
 		this.profil = profil;
 	}
 
-	public Utilisateur getConnectedUtilisateur() {
+	public User getConnectedUtilisateur() {
 		return connectedUtilisateur;
 	}
 
-	public void setConnectedUtilisateur(Utilisateur connectedUtilisateur) {
+	public void setConnectedUtilisateur(User connectedUtilisateur) {
 		this.connectedUtilisateur = connectedUtilisateur;
 	}
 
